@@ -210,7 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: size.height * 0.02,
+                      height: size.height * 0.04,
                     ),
                     isLoading == false
                         ? MyButton(
