@@ -42,7 +42,7 @@ class _SkipScreenState extends State<SkipScreen> {
         },
         child: Icon(
           Icons.arrow_forward,
-          color: kBackground2,
+          color: Colors.white,
           size: 30.0,
         ),
       ),

@@ -350,10 +350,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       CircleAvatar(
-                                        maxRadius: 85,
+                                        maxRadius: 90,
                                         backgroundColor: kBackground2,
                                         child: CircleAvatar(
-                                            maxRadius: 77,
+                                            maxRadius: 83,
                                             backgroundImage: _pickedImage ==
                                                     null
                                                 ? userModel.userImage == null
@@ -372,11 +372,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             left: MediaQuery.of(context)
                                                     .viewPadding
                                                     .left +
-                                                220,
+                                                230,
                                             top: MediaQuery.of(context)
                                                     .viewPadding
                                                     .left +
-                                                110),
+                                                130),
                                         child: Card(
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
