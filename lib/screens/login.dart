@@ -1,3 +1,4 @@
+import 'package:book_recommend/adminPages/adminhome.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/logs/facebook.dart';
 import 'package:book_recommend/logs/google.dart';
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               .signInWithEmailAndPassword(
                   email: email.text, password: password.text);
           print(result);
-          // Navigator.of(context).pushReplacementNamed('admin');
+          Navigator.pushReplacementNamed(context, AdminHome.id);
         } on PlatformException catch (error) {
           var message = "Please Check Your Internet Connection ";
           if (error.message != null) {
@@ -70,7 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
             .signInWithEmailAndPassword(
                 email: email.text, password: password.text);
         print(result);
-        Navigator.of(context).pushReplacement(
+        Navigator.pushReplacement(
+          context,
           MaterialPageRoute(
             builder: (ctx) => HomeScreen(),
           ),
@@ -150,8 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: size.height * 0.03,
                     ),
                     Image.asset(
-                      'assets/icons/online.png',
-                      width: size.width * 0.6,
+                      'assets/skip/logo.png',
+                      width: size.width * 0.4,
+                      height: size.width * 0.4,
                     ),
                     SizedBox(
                       height: size.height * 0.01,
@@ -229,7 +232,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       title: 'Don\'t have an account ? ',
                       subTitle: ' Sign Up',
                       onTap: () {
-                        Navigator.pushNamed(context, RegisterScreen.id);
+                        Navigator.pushReplacementNamed(
+                            context, RegisterScreen.id);
                       },
                     ),
                     SizedBox(

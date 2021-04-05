@@ -12,7 +12,7 @@ class _FaceBookState extends State<FaceBook> {
     return OutlineButton(
       splashColor: kBackground1,
       onPressed: () async {
-        //await signWithGoogle();
+        //await signWithFacebook();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       highlightElevation: 0,

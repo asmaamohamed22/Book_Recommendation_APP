@@ -121,7 +121,7 @@ class _ContactUsState extends State<ContactUs> {
                         height: size.height * 0.02,
                       ),
                       Text(
-                        "Sent Us Your Message",
+                        "Send Us Your Message",
                         style: TextStyle(
                           color: kBackground2,
                           fontSize: 28,

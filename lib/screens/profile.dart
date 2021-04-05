@@ -24,6 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController phoneNumber;
   TextEditingController userName;
   TextEditingController userEmail;
+  TextEditingController userPassword;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   static String p =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -35,6 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void validation() async {
     if (userName.text.isEmpty &&
         userEmail.text.isEmpty &&
+        userPassword.text.isEmpty &&
         phoneNumber.text.isEmpty) {
       _scaffoldKey.currentState.showSnackBar(
         SnackBar(
@@ -45,6 +47,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _scaffoldKey.currentState.showSnackBar(
         SnackBar(
           content: Text('Name Must Be 6'),
+        ),
+      );
+    } else if (userPassword.text.isEmpty) {
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text('Password Is Empty'),
         ),
       );
     } else if (userEmail.text.isEmpty) {
@@ -111,6 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "UserName": userName.text,
       "UserEmail": userEmail.text,
       "UserNumber": phoneNumber.text,
+      "UserPassword": userPassword.text,
       "UserImage": imageMap,
     });
     setState(() {
@@ -148,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Text(
                   startText,
-                  style: TextStyle(fontSize: 17, color: Colors.black45),
+                  style: TextStyle(fontSize: 17, color: Colors.black54),
                 ),
                 Text(
                   endText,
@@ -174,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     userName = TextEditingController(text: userModel.userName);
     userEmail = TextEditingController(text: userModel.userEmail);
     phoneNumber = TextEditingController(text: userModel.userPhoneNumber);
-
+    userPassword = TextEditingController(text: userModel.userPassword);
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -190,6 +199,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildSingleContainer(
             endText: userModel.userPhoneNumber,
             startText: "Phone Number",
+          ),
+          _buildSingleContainer(
+            endText: userModel.userPassword,
+            startText: "Password",
           ),
         ],
       ),
@@ -228,22 +241,94 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
   }
 
-  Widget _buildTextFormFliedPart() {
+  Widget _buildTextFormFieldPart() {
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          MyText(
-            name: "UserName",
-            controller: userName,
+          Column(
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Username',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: kBackground2),
+                ),
+              ),
+              SizedBox(
+                height: 6.0,
+              ),
+              MyText(
+                name: "UserName",
+                controller: userName,
+              ),
+            ],
           ),
-          MyText(
-            name: "UserEmail",
-            controller: userEmail,
+          Column(
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Email',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: kBackground2),
+                ),
+              ),
+              SizedBox(
+                height: 6.0,
+              ),
+              MyText(
+                name: "UserEmail",
+                controller: userEmail,
+              ),
+            ],
           ),
-          MyText(
-            name: "Phone Number",
-            controller: phoneNumber,
+          Column(
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Phone Number',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: kBackground2),
+                ),
+              ),
+              SizedBox(
+                height: 6.0,
+              ),
+              MyText(
+                name: "Phone Number",
+                controller: phoneNumber,
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Password',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: kBackground2),
+                ),
+              ),
+              SizedBox(
+                height: 6.0,
+              ),
+              MyText(
+                name: "UserPassword",
+                controller: userPassword,
+              ),
+            ],
           ),
         ],
       ),
@@ -276,7 +361,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: Icon(
                   Icons.arrow_back,
                   color: kBackground2,
-                  size: 30,
+                  size: 35,
                 ),
                 onPressed: () {
                   setState(() {
@@ -291,14 +376,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Colors.white,
         actions: [
           edit == false
-              ? IconButton(
-                  icon: Icon(
-                    Icons.notifications_none,
-                    size: 30,
-                    color: kBackground2,
-                  ),
-                  onPressed: () {},
-                )
+              ? Container()
               : IconButton(
                   icon: Icon(
                     Icons.check,
@@ -331,6 +409,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           userModel = UserModel(
                             userEmail: checkDocs.data()["UserEmail"],
                             userImage: checkDocs.data()["UserImage"],
+                            userPassword: checkDocs.data()["UserPassword"],
                             userName: checkDocs.data()["UserName"],
                             userPhoneNumber: checkDocs.data()["UserNumber"],
                           );
@@ -409,7 +488,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Expanded(
                                     child: Container(
                                       child: edit == true
-                                          ? _buildTextFormFliedPart()
+                                          ? _buildTextFormFieldPart()
                                           : _buildContainerPart(),
                                     ),
                                   ),

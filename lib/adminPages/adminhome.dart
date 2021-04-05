@@ -1,9 +1,9 @@
-import 'dart:ui';
-
+import 'package:book_recommend/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatefulWidget {
+  static String id = 'AdminHome';
   @override
   _AdminHomeState createState() => _AdminHomeState();
 }
@@ -34,18 +34,25 @@ class _AdminHomeState extends State<AdminHome> {
                         children: [
                           IconButton(
                             icon: Icon(
-                              Icons.notifications_none,
+                              Icons.sort,
                               size: 30,
                             ),
                             onPressed: () {},
                           ),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
-                            'Admin Home',
+                            'Dashboard',
                             style: TextStyle(
                               color: Colors.white,
+                              fontWeight: FontWeight.bold,
                               fontFamily: 'pacifico',
-                              fontSize: 25.0,
+                              fontSize: 30,
                             ),
+                          ),
+                          SizedBox(
+                            width: 10,
                           ),
                           IconButton(
                             icon: Icon(
@@ -57,7 +64,7 @@ class _AdminHomeState extends State<AdminHome> {
                                   .signOut()
                                   .then((value) {
                                 Navigator.of(context)
-                                    .pushReplacementNamed('login');
+                                    .pushReplacementNamed(LoginScreen.id);
                               });
                             },
                           ),
@@ -82,7 +89,7 @@ class _AdminHomeState extends State<AdminHome> {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Container(
                 color: Colors.white,
               ),

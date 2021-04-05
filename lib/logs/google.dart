@@ -17,8 +17,8 @@ class _GoogleSignState extends State<GoogleSign> {
     return OutlineButton(
       splashColor: kBackground1,
       onPressed: () async {
-        await signWithGoogle()
-            .whenComplete(() => Navigator.pushNamed(context, HomeScreen.id));
+        // await signWithGoogle()
+        //     .whenComplete(() => Navigator.pushNamed(context, HomeScreen.id));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       highlightElevation: 0,

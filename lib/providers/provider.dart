@@ -15,6 +15,7 @@ class BookProvider with ChangeNotifier {
       (element) {
         if (currentUser.uid == element.data()['UserId']) {
           userModel = UserModel(
+              userPassword: element.data()['UserPassword'],
               userImage: element.data()['UserImage'],
               userName: element.data()['UserName'],
               userEmail: element.data()['UserEmail'],

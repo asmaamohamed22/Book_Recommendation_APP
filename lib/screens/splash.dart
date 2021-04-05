@@ -15,7 +15,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3),
-        () => Navigator.pushNamed(context, SkipScreen.id));
+        () => Navigator.pushReplacementNamed(context, SkipScreen.id));
   }
 
   @override
@@ -28,14 +28,15 @@ class _SplashState extends State<Splash> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/icons/online.png',
-            width: size.width * 0.6,
+            'assets/skip/logo.png',
+            width: size.width * 0.2,
+            height: size.width * 0.2,
           ),
           SizedBox(
             height: size.height * 0.03,
           ),
           SpinKitThreeBounce(
-            size: 40.0,
+            size: 35.0,
             color: kBackground1,
           ),
         ],

@@ -1,3 +1,4 @@
+import 'package:book_recommend/adminPages/adminhome.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/about.dart';
@@ -9,6 +10,9 @@ import 'package:book_recommend/screens/register.dart';
 import 'package:book_recommend/screens/skip.dart';
 import 'package:book_recommend/screens/splash.dart';
 import 'package:book_recommend/screens/welcome.dart';
+import 'package:book_recommend/setting/managePassword.dart';
+import 'package:book_recommend/setting/setting.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:provider/provider.dart';
@@ -37,7 +41,16 @@ class MyBook extends StatelessWidget {
           ),
           primaryColor: kBackground2,
         ),
-        home: Splash(),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return HomeScreen();
+            } else {
+              return Splash();
+            }
+          },
+        ),
         routes: {
           Splash.id: (context) => Splash(),
           SkipScreen.id: (context) => SkipScreen(),
@@ -48,7 +61,9 @@ class MyBook extends StatelessWidget {
           ProfileScreen.id: (context) => ProfileScreen(),
           AboutScreen.id: (context) => AboutScreen(),
           ContactUs.id: (context) => ContactUs(),
-          //  'admin': (context) => AdminHome(),
+          Setting.id: (context) => Setting(),
+          AdminHome.id: (context) => AdminHome(),
+          ManagePassword.id: (context) => ManagePassword(),
         },
       ),
     );

@@ -29,8 +29,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Column(
                     children: [
                       Image.asset(
-                        'assets/icons/online.png',
-                        width: size.width * 0.6,
+                        'assets/skip/logo.png',
+                        width: size.width * 0.5,
+                        height: size.width * 0.4,
                       ),
                       SizedBox(
                         height: size.height * 0.07,
@@ -41,7 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           'Get the best recommendation for book!',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 34.0,
+                            fontSize: 32.0,
                             fontWeight: FontWeight.bold,
                             color: kBackground2,
                           ),

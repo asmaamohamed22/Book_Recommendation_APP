@@ -18,7 +18,7 @@ class _AboutScreenState extends State<AboutScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, HomeScreen.id);
+            Navigator.pushReplacementNamed(context, HomeScreen.id);
           },
           icon: Icon(
             Icons.arrow_back,
@@ -44,24 +44,17 @@ class _AboutScreenState extends State<AboutScreen> {
                     child: Text(
                       "About",
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 35,
                         color: kBackground2,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: size.height * 0.01,
-                  ),
                   Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.topLeft,
                     child: Image.asset(
-                      'assets/images/kingicon.png',
-                      height: 180.0,
-                      width: 180.0,
+                      'assets/icons/logo.png',
+                      width: 250,
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.02,
                   ),
                   Text(
                     'Who we are ?',
@@ -77,7 +70,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Text(
                     'Book Recommendation App',
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 22.0,
                       color: Colors.black,
                     ),
                   ),
@@ -85,9 +78,9 @@ class _AboutScreenState extends State<AboutScreen> {
                     height: size.height * 0.01,
                   ),
                   Text(
-                    'Since 2020 we make people happy with our services,This app you can get on all recommendation book that you like to read it.',
+                    'Since 2021 we make people happy with our services ,This app you can get on all recommendation book that you want to be recommended for you.',
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 18.0,
                       color: Colors.black,
                     ),
                   ),

@@ -4,6 +4,7 @@ import 'package:book_recommend/screens/about.dart';
 import 'package:book_recommend/screens/contactus.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
+import 'package:book_recommend/setting/setting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildUserAccountsDrawerHeader(),
               ListTile(
                 onTap: () {
-                  // Navigator.of(context).pushReplacementNamed('homeApp');
+                  Navigator.pushNamed(context, HomeScreen.id);
                 },
                 leading: Icon(
                   Icons.home,
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ProfileScreen.id);
+                  Navigator.pushReplacementNamed(context, ProfileScreen.id);
                 },
                 leading: Icon(
                   Icons.person,
@@ -51,6 +52,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 title: Text(
                   'Profile',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  // Navigator.of(context).pushReplacementNamed('homeApp');
+                },
+                leading: Icon(
+                  Icons.group,
+                  color: Theme.of(context).primaryColor,
+                ),
+                title: Text(
+                  'Rooms',
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -78,22 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Navigator.of(context).pushReplacementNamed('homeApp');
                 },
                 leading: Icon(
-                  Icons.library_books,
-                  color: Theme.of(context).primaryColor,
-                ),
-                title: Text(
-                  'My Library',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ListTile(
-                onTap: () {
-                  // Navigator.of(context).pushReplacementNamed('homeApp');
-                },
-                leading: Icon(
                   Icons.save,
                   color: Theme.of(context).primaryColor,
                 ),
@@ -107,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ContactUs.id);
+                  Navigator.pushReplacementNamed(context, ContactUs.id);
                 },
                 leading: Icon(
                   Icons.contact_phone,
@@ -123,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, AboutScreen.id);
+                  Navigator.pushReplacementNamed(context, AboutScreen.id);
                 },
                 leading: Icon(
                   Icons.info,
@@ -139,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  // Navigator.of(context).pushReplacementNamed('homeApp');
+                  Navigator.pushReplacementNamed(context, Setting.id);
                 },
                 leading: Icon(
                   Icons.settings,
@@ -156,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ListTile(
                 onTap: () async {
                   await FirebaseAuth.instance.signOut().then((value) {
-                    Navigator.pushNamed(context, LoginScreen.id);
+                    Navigator.pushReplacementNamed(context, LoginScreen.id);
                   });
                 },
                 leading: Icon(
@@ -187,8 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
             e.userName,
             style: TextStyle(
               color: Colors.black,
-              fontFamily: 'pacifico',
-              fontSize: 18.0,
+              fontSize: 20.0,
             ),
           ),
           currentAccountPicture: CircleAvatar(
@@ -204,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
             e.userEmail,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 13.0,
+              fontSize: 15.0,
             ),
           ),
         );
@@ -222,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //Size size = MediaQuery.of(context).size;
     bookProvider = Provider.of<BookProvider>(context);
     getCallAllFunction();
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       key: _scaffoldKey,
@@ -254,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           IconButton(
                             icon: Icon(
-                              Icons.notifications_none,
+                              Icons.search,
                               size: 30,
                             ),
                             onPressed: () {},
@@ -268,38 +269,29 @@ class _HomeScreenState extends State<HomeScreen> {
                           Container(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 40,
+                                horizontal: 20,
                               ),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CircleAvatar(
-                                    maxRadius: 50,
+                                    radius: 45,
                                     backgroundColor: Colors.white,
-                                    child: CircleAvatar(
-                                      maxRadius: 45,
-                                      backgroundImage: AssetImage(
-                                        'assets/images/kingicon.png',
-                                      ),
+                                    backgroundImage: AssetImage(
+                                      'assets/skip/home.png',
                                     ),
                                   ),
                                   Container(
-                                    height: 80,
-                                    width: 220,
+                                    height: 90,
+                                    width: 250,
                                     child: ListTile(
                                       title: Text(
-                                        'What do you like',
+                                        'What do you want to be recommended for you ?',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 23.0,
+                                          fontSize: 22.0,
                                           color: Colors.white,
-                                        ),
-                                      ),
-                                      subtitle: Text(
-                                        'to read ?',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 23.0,
                                         ),
                                       ),
                                     ),

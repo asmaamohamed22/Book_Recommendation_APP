@@ -67,9 +67,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       "UserId": result.user.uid,
       "UserEmail": email.text,
       "UserNumber": phoneNumber.text,
+      "UserPassword": password.text,
     });
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (ctx) => HomeScreen()));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (ctx) => HomeScreen()));
     setState(() {
       isLoading = false;
     });
@@ -149,8 +150,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: size.height * 0.03,
                     ),
                     Image.asset(
-                      'assets/icons/online.png',
-                      width: size.width * 0.6,
+                      'assets/skip/logo.png',
+                      width: size.width * 0.4,
                     ),
                     SizedBox(
                       height: size.height * 0.01,
@@ -254,7 +255,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       title: 'I have an account ! ',
                       subTitle: ' Sign In',
                       onTap: () {
-                        Navigator.pushNamed(context, LoginScreen.id);
+                        Navigator.pushReplacementNamed(context, LoginScreen.id);
                       },
                     ),
                   ],
