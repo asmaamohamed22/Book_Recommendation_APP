@@ -1,9 +1,10 @@
-import 'package:book_recommend/adminPages/adminhome.dart';
+import 'package:book_recommend/adminPages/Dashboard.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/logs/facebook.dart';
 import 'package:book_recommend/logs/google.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/screens/register.dart';
+import 'package:book_recommend/screens/reset.dart';
 import 'package:book_recommend/widgets/haveaccountornot.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
 import 'package:book_recommend/widgets/orDivider.dart';
@@ -46,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               .signInWithEmailAndPassword(
                   email: email.text, password: password.text);
           print(result);
-          Navigator.pushReplacementNamed(context, AdminHome.id);
+          Navigator.pushReplacementNamed(context, Dashboard.id);
         } on PlatformException catch (error) {
           var message = "Please Check Your Internet Connection ";
           if (error.message != null) {
@@ -134,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -164,6 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(
                         fontFamily: 'pacifico',
                         fontSize: 30.0,
+                        color: Theme.of(context).backgroundColor,
                       ),
                     ),
                     SizedBox(
@@ -210,10 +212,26 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: size.height * 0.01,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, ResetPassword.id);
+                          },
+                          child: Text(
+                            'Forget Password ?',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              color: kBackground2,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(
-                      height: size.height * 0.04,
+                      height: size.height * 0.01,
                     ),
                     isLoading == false
                         ? MyButton(

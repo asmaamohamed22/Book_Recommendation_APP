@@ -13,8 +13,8 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -26,7 +26,7 @@ class _AboutScreenState extends State<AboutScreen> {
             size: 35,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
       body: SafeArea(
@@ -56,11 +56,14 @@ class _AboutScreenState extends State<AboutScreen> {
                       width: 250,
                     ),
                   ),
+                  SizedBox(
+                    height: 40,
+                  ),
                   Text(
                     'Who we are ?',
                     style: TextStyle(
                       fontSize: 25.0,
-                      color: Colors.black,
+                      color: Theme.of(context).backgroundColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -71,7 +74,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     'Book Recommendation App',
                     style: TextStyle(
                       fontSize: 22.0,
-                      color: Colors.black,
+                      color: Theme.of(context).backgroundColor,
                     ),
                   ),
                   SizedBox(
@@ -81,7 +84,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     'Since 2021 we make people happy with our services ,This app you can get on all recommendation book that you want to be recommended for you.',
                     style: TextStyle(
                       fontSize: 18.0,
-                      color: Colors.black,
+                      color: Theme.of(context).backgroundColor,
                     ),
                   ),
                   SizedBox(
@@ -104,7 +107,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         'developers_team@gmail.com',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Theme.of(context).backgroundColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -130,7 +133,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         'internet street FCAIH helwan university',
                         style: TextStyle(
                           fontSize: 15.0,
-                          color: Colors.black,
+                          color: Theme.of(context).backgroundColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -156,7 +159,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         '+2001123456789',
                         style: TextStyle(
                           fontSize: 15.0,
-                          color: Colors.black,
+                          color: Theme.of(context).backgroundColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

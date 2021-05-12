@@ -139,14 +139,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Container(
           height: 60,
           decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
               border: Border(
-            right: BorderSide(color: kBackground2, width: 5),
-          )),
+                right: BorderSide(color: kBackground2, width: 5),
+              )),
           child: Container(
             height: 55,
             padding: EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-              color: edit == true ? color : Colors.white,
+              color: edit == true
+                  ? color
+                  : Theme.of(context).scaffoldBackgroundColor,
               borderRadius: edit == false
                   ? BorderRadius.circular(30)
                   : BorderRadius.circular(0),
@@ -157,14 +160,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Text(
                   startText,
-                  style: TextStyle(fontSize: 17, color: Colors.black54),
+                  style: TextStyle(
+                      fontSize: 17, color: Theme.of(context).hintColor),
                 ),
                 Text(
                   endText,
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).hintColor),
                 ),
               ],
             ),
@@ -272,27 +276,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Container(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'Email',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: kBackground2),
-                ),
-              ),
-              SizedBox(
-                height: 6.0,
-              ),
-              MyText(
-                name: "UserEmail",
-                controller: userEmail,
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                child: Text(
                   'Phone Number',
                   style: TextStyle(
                       fontSize: 16,
@@ -341,7 +324,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       key: _scaffoldKey,
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.0,
         leading: edit == true
@@ -373,7 +355,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   });
                 },
               ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: [
           edit == false
               ? Container()
@@ -520,7 +502,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             )
           : Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                  backgroundColor: Theme.of(context).iconTheme.color),
             ),
     );
   }

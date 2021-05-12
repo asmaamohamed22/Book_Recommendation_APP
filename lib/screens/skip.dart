@@ -16,22 +16,22 @@ class _SkipScreenState extends State<SkipScreen> {
   List<Map<String, String>> skipData = [
     {
       "text": "Get personalized recommended book for you",
-      "image": "assets/skip/reading.png",
+      "image": "assets/skip/read.svg",
     },
     {
       "text": "Discover new books based on your interest",
-      "image": "assets/skip/search.png",
+      "image": "assets/skip/discover.svg",
     },
     {
       "text": "Make a library of your favourites",
-      "image": "assets/skip/favourite.png",
+      "image": "assets/skip/love.svg",
     },
   ];
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
@@ -67,8 +67,7 @@ class _SkipScreenState extends State<SkipScreen> {
                     RoundedButton(
                       text: 'Continue',
                       press: () {
-                        Navigator.pushNamed(
-                            context, WelcomeScreen.id);
+                        Navigator.pushNamed(context, WelcomeScreen.id);
                       },
                       color: kBackground2,
                       textColor: Colors.white,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-Color kBackground1 = Color(0xFF9BC7E6);
+Color kBackground1 = Color(0xFF6DB9CB);
 Color kBackground2 = Color(0xFF06597B);
-Color kBackground3 = Color(0xFFF5BF7D);
+Color kBackground3 = Color(0xFFD6D8D8);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 const kTextFieldDecoration = InputDecoration(
@@ -20,3 +20,20 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(30.0)),
   ),
 );
+
+const kBookTitle = 'bookTitle';
+const kBookImage = 'bookImage';
+const kBookIsbn = 'bookIsbn';
+const kBookAuthor = 'bookAuthor';
+const kBookYearOfPublication = 'bookYearOfPublication';
+const kBookDescription = 'bookDescription';
+const kBookCategory = 'bookCategory';
+const kBookLanguage = 'bookLanguage';
+const kBookPublisher = 'bookPublisher';
+const kBooksCollection = 'Books';
+const kMessagesCollection = 'Feedbacks';
+const kFeedbackId = 'feedbackId';
+const kFeedbackName = 'feedbackName';
+const kFeedbackEmail = 'feedbackEmail';
+const kFeedbackMessage = 'feedbackMessage';
+const kTime = 'createdAt';

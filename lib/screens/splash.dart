@@ -11,18 +11,37 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  Timer _timer;
+  void startTime() async {
+    _timer = Timer(Duration(seconds: 3), navigationPage);
+  }
+
+  void navigationPage() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SkipScreen(),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3),
-        () => Navigator.pushReplacementNamed(context, SkipScreen.id));
+    startTime();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,

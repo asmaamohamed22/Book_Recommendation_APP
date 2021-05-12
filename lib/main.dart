@@ -1,15 +1,26 @@
-import 'package:book_recommend/adminPages/adminhome.dart';
-import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/adminPages/Dashboard.dart';
+import 'package:book_recommend/adminPages/addBook.dart';
+import 'package:book_recommend/adminPages/adminMode.dart';
+import 'package:book_recommend/adminPages/bookDetails.dart';
+import 'package:book_recommend/adminPages/editBook.dart';
+import 'package:book_recommend/adminPages/viewBook.dart';
+import 'package:book_recommend/adminPages/viewFeedback.dart';
+import 'package:book_recommend/providers/notification_provider.dart';
 import 'package:book_recommend/providers/provider.dart';
+import 'package:book_recommend/providers/theme_provider.dart';
 import 'package:book_recommend/screens/about.dart';
+import 'package:book_recommend/screens/chat/chatScreen.dart';
 import 'package:book_recommend/screens/contactus.dart';
+import 'package:book_recommend/screens/favorite.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/register.dart';
+import 'package:book_recommend/screens/reset.dart';
 import 'package:book_recommend/screens/skip.dart';
 import 'package:book_recommend/screens/splash.dart';
 import 'package:book_recommend/screens/welcome.dart';
+import 'package:book_recommend/setting/darkmode.dart';
 import 'package:book_recommend/setting/managePassword.dart';
 import 'package:book_recommend/setting/setting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,49 +34,67 @@ void main() async {
   runApp(MyBook());
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<BookProvider>(
-          create: (context) => BookProvider(),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Book',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          iconTheme: IconThemeData(
-            color: Colors.white,
+        providers: [
+          ChangeNotifierProvider<BookProvider>(
+            create: (context) => BookProvider(),
           ),
-          primaryColor: kBackground2,
-        ),
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return HomeScreen();
-            } else {
-              return Splash();
-            }
-          },
-        ),
-        routes: {
-          Splash.id: (context) => Splash(),
-          SkipScreen.id: (context) => SkipScreen(),
-          WelcomeScreen.id: (context) => WelcomeScreen(),
-          LoginScreen.id: (context) => LoginScreen(),
-          RegisterScreen.id: (context) => RegisterScreen(),
-          HomeScreen.id: (context) => HomeScreen(),
-          ProfileScreen.id: (context) => ProfileScreen(),
-          AboutScreen.id: (context) => AboutScreen(),
-          ContactUs.id: (context) => ContactUs(),
-          Setting.id: (context) => Setting(),
-          AdminHome.id: (context) => AdminHome(),
-          ManagePassword.id: (context) => ManagePassword(),
-        },
-      ),
-    );
+          ChangeNotifierProvider<FeedbackProvider>(
+            create: (context) => FeedbackProvider(),
+          ),
+          ChangeNotifierProvider<ThemeProvider>(
+            create: (context) => ThemeProvider(),
+          ),
+        ],
+        builder: (context, _) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+            navigatorKey: navigatorKey,
+            title: 'Book',
+            themeMode: themeProvider.themeMode,
+            darkTheme: MyThemes.darkTheme,
+            debugShowCheckedModeBanner: false,
+            theme: MyThemes.lightTheme,
+            home: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return HomeScreen();
+                } else {
+                  return Splash();
+                }
+              },
+            ),
+            routes: {
+              Splash.id: (context) => Splash(),
+              SkipScreen.id: (context) => SkipScreen(),
+              WelcomeScreen.id: (context) => WelcomeScreen(),
+              LoginScreen.id: (context) => LoginScreen(),
+              RegisterScreen.id: (context) => RegisterScreen(),
+              HomeScreen.id: (context) => HomeScreen(),
+              ProfileScreen.id: (context) => ProfileScreen(),
+              Favorite.id: (context) => Favorite(),
+              ChatScreen.id: (context) => ChatScreen(),
+              AboutScreen.id: (context) => AboutScreen(),
+              ContactUs.id: (context) => ContactUs(),
+              Setting.id: (context) => Setting(),
+              ManagePassword.id: (context) => ManagePassword(),
+              ResetPassword.id: (context) => ResetPassword(),
+              Dashboard.id: (context) => Dashboard(),
+              AddBook.id: (context) => AddBook(),
+              EditBook.id: (context) => EditBook(),
+              ViewBook.id: (context) => ViewBook(),
+              BookDetails.id: (context) => BookDetails(),
+              ViewFeedback.id: (context) => ViewFeedback(),
+              DarkMode.id: (context) => DarkMode(),
+              AdminMode.id: (context) => AdminMode(),
+            },
+          );
+        });
   }
 }

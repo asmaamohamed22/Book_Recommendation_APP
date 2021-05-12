@@ -38,7 +38,10 @@ dependencies:
   carousel_slider: ^2.3.1
   google_sign_in: ^4.5.5
   image_picker: ^0.6.7+12
-  circular_profile_avatar: ^1.0.8
+  google_fonts: ^0.2.0
+  badges: ^1.2.0
+  firebase_messaging: ^7.0.3
+  flutter_svg: ^0.19.1
   
 dev_dependencies:
   flutter_test:

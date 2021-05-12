@@ -1,5 +1,6 @@
 import 'package:book_recommend/widgets/sizeconfig.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SkipContent extends StatelessWidget {
   const SkipContent({
@@ -11,7 +12,7 @@ class SkipContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         SizedBox(
@@ -26,14 +27,17 @@ class SkipContent extends StatelessWidget {
           text,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).backgroundColor,
             fontSize: 17,
           ),
         ),
-        Image.asset(
+        SizedBox(
+          height: 40,
+        ),
+        SvgPicture.asset(
           image,
-          height: getProportionateScreenHeight(380),
-          width: getProportionateScreenWidth(400),
+          height: getProportionateScreenHeight(240),
+          width: getProportionateScreenWidth(350),
         ),
       ],
     );
