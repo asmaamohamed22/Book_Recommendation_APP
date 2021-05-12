@@ -426,11 +426,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       child: GestureDetector(
-                                        onTap: () {
-                                         // Navigator.pushNamed(
-                                             // context, BookDetails.id,
-                                             // arguments: books[index]);
-                                        },
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(30)),
