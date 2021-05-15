@@ -44,7 +44,7 @@ class _BookDetailsState extends State<BookDetails> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                   child: ListView.builder(
                     itemCount: 1,
                     itemBuilder: (context, index) => Row(
@@ -67,14 +67,13 @@ class _BookDetailsState extends State<BookDetails> {
                             },
                           ),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Row(
-                            children: [
-                              IconButton(
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 25,
+                              backgroundColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              child: IconButton(
                                 icon: Icon(
                                   Icons.edit,
                                   size: 30,
@@ -85,7 +84,15 @@ class _BookDetailsState extends State<BookDetails> {
                                       arguments: book);
                                 },
                               ),
-                              IconButton(
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            CircleAvatar(
+                              radius: 25,
+                              backgroundColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              child: IconButton(
                                 icon: Icon(
                                   Icons.delete,
                                   color: kBackground2,
@@ -104,11 +111,11 @@ class _BookDetailsState extends State<BookDetails> {
                                   });
                                 },
                               ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                          ],
                         )
                       ],
                     ),

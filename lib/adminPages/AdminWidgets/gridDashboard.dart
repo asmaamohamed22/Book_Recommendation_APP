@@ -45,7 +45,7 @@ class _GridDashboardState extends State<GridDashboard> {
       title: "Generate Report",
       subtitle: "📝",
       onPressed: () {
-        Navigator.pushReplacementNamed(context, HomeScreen.id);
+        //Navigator.pushReplacementNamed(context, HomeScreen.id);
       },
     );
 

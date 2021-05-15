@@ -1,4 +1,3 @@
-import 'package:book_recommend/adminPages/bookDetails.dart';
 import 'package:book_recommend/adminPages/models/book.dart';
 import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/constant.dart';
@@ -245,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
     getCallAllFunction();
     Size size = MediaQuery.of(context).size;
     final _store = Store();
-    Book book;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomPadding: false,

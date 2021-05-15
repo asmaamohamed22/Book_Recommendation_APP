@@ -1,5 +1,5 @@
 import 'package:book_recommend/adminPages/models/book.dart';
-import 'package:book_recommend/adminPages/services/store.dart';
+
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +18,6 @@ class _DetailsState extends State<Details> {
   }
 
   Book book;
-  Store _store = Store();
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
