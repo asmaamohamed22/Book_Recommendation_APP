@@ -2,20 +2,20 @@ import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:flutter/material.dart';
 
-class Favorite extends StatefulWidget {
-  static String id = 'Favorite';
+class Save extends StatefulWidget {
+  static String id = 'Save';
   @override
-  _FavoriteState createState() => _FavoriteState();
+  _SaveState createState() => _SaveState();
 }
 
-class _FavoriteState extends State<Favorite> {
+class _SaveState extends State<Save> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(
-          'Favorite',
+          'Save',
           style: TextStyle(
               color: kBackground2, fontSize: 20, fontWeight: FontWeight.bold),
         ),

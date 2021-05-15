@@ -11,12 +11,14 @@ import 'package:book_recommend/providers/theme_provider.dart';
 import 'package:book_recommend/screens/about.dart';
 import 'package:book_recommend/screens/chat/chatScreen.dart';
 import 'package:book_recommend/screens/contactus.dart';
+import 'package:book_recommend/screens/details.dart';
 import 'package:book_recommend/screens/favorite.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/register.dart';
 import 'package:book_recommend/screens/reset.dart';
+import 'package:book_recommend/screens/saved.dart';
 import 'package:book_recommend/screens/skip.dart';
 import 'package:book_recommend/screens/splash.dart';
 import 'package:book_recommend/screens/welcome.dart';
@@ -77,11 +79,14 @@ class MyBook extends StatelessWidget {
               LoginScreen.id: (context) => LoginScreen(),
               RegisterScreen.id: (context) => RegisterScreen(),
               HomeScreen.id: (context) => HomeScreen(),
+              Details.id: (context) => Details(),
               ProfileScreen.id: (context) => ProfileScreen(),
               Favorite.id: (context) => Favorite(),
               ChatScreen.id: (context) => ChatScreen(),
               AboutScreen.id: (context) => AboutScreen(),
               ContactUs.id: (context) => ContactUs(),
+              Save.id: (context) => Save(),
+              Favorite.id: (context) => Favorite(),
               Setting.id: (context) => Setting(),
               ManagePassword.id: (context) => ManagePassword(),
               ResetPassword.id: (context) => ResetPassword(),

@@ -7,8 +7,11 @@ import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/about.dart';
 import 'package:book_recommend/screens/chat/chatScreen.dart';
 import 'package:book_recommend/screens/contactus.dart';
+import 'package:book_recommend/screens/details.dart';
+import 'package:book_recommend/screens/favorite.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
+import 'package:book_recommend/screens/saved.dart';
 import 'package:book_recommend/setting/setting.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -82,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  //  Navigator.pushReplacementNamed(context, ChatScreen.id);
+                  Navigator.pushReplacementNamed(context, Favorite.id);
                 },
                 leading: Icon(
                   Icons.favorite_outline,
@@ -98,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  // Navigator.of(context).pushReplacementNamed('homeApp');
+                  Navigator.pushReplacementNamed(context, Save.id);
                 },
                 leading: Icon(
                   Icons.save_outlined,
@@ -184,9 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Image.asset(
-                      'assets/images/kingicon.png',
-                      height: 70,
-                      width: 70,
+                      'assets/skip/logo.png',
+                      height: 40,
+                      width: 40,
                     ),
                   ],
                 ),
@@ -426,6 +429,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, Details.id,
+                                              arguments: books[index]);
+                                        },
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(30)),
