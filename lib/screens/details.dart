@@ -95,9 +95,6 @@ class _DetailsState extends State<Details> {
                                 onPressed: () {},
                               ),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
                           ],
                         ),
                       ],
@@ -179,6 +176,7 @@ class _DetailsState extends State<Details> {
                         style: TextStyle(
                           fontSize: 16,
                         ),
+                        textAlign: TextAlign.justify,
                       ),
                       SizedBox(
                         height: 10,

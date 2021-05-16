@@ -112,9 +112,6 @@ class _BookDetailsState extends State<BookDetails> {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
                           ],
                         )
                       ],
@@ -196,6 +193,7 @@ class _BookDetailsState extends State<BookDetails> {
                         style: TextStyle(
                           fontSize: 16,
                         ),
+                        textAlign: TextAlign.justify,
                       ),
                       SizedBox(
                         height: 10,
