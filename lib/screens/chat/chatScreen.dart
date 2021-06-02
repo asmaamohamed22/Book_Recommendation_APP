@@ -19,7 +19,11 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Text(
           'Room',
           style: TextStyle(
-              color: kBackground2, fontSize: 20, fontWeight: FontWeight.bold),
+            color: kBackground2,
+            fontSize: 25,
+            //fontWeight: FontWeight.bold,
+            fontFamily: 'pacifico',
+          ),
         ),
         centerTitle: true,
         leading: IconButton(

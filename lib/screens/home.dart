@@ -291,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   IconButton(
                                     icon: Icon(
-                                      Icons.search,
+                                      Icons.recommend,
                                       color: Colors.white,
                                       size: 35,
                                     ),
@@ -313,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       CircleAvatar(
-                                        radius: 45,
+                                        radius: 40,
                                         backgroundColor: Colors.white,
                                         backgroundImage: AssetImage(
                                           'assets/skip/home.png',
@@ -327,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           'What do you want\n to read ?',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 22,
+                                            fontSize: 21,
                                             color: Colors.white,
                                           ),
                                         ),
@@ -384,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 15),
+                            horizontal: 10, vertical: 10),
                         child: Text(
                           "Recommended",
                           style: TextStyle(

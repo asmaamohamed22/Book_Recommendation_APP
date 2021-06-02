@@ -40,4 +40,76 @@ class Store {
   editBook(data, documentId) async {
     await _firestore.collection(kBooksCollection).doc(documentId).update(data);
   }
+
+  addBookToSaveList({
+    @required String bookIsbn,
+    @required String bookTitle,
+    @required String bookImage,
+    @required String bookDescription,
+    @required String bookAuthor,
+    @required String bookCategory,
+    @required String bookLanguage,
+    @required String bookPublisher,
+    @required String bookYearOfPublication,
+  }) async {
+    _firestore.collection("SaveList").add({
+      "createdAt": Timestamp.now(),
+      "bookIsbn": bookIsbn,
+      "bookTitle": bookTitle,
+      "bookImage": bookImage,
+      "bookDescription": bookDescription,
+      "bookAuthor": bookAuthor,
+      "bookCategory": bookCategory,
+      "bookLanguage": bookLanguage,
+      "bookPublisher": bookPublisher,
+      "bookYearOfPublication": bookYearOfPublication,
+    });
+  }
+
+  Stream<QuerySnapshot> loadSaveBooks() {
+    return _firestore
+        .collection("SaveList")
+        .orderBy("createdAt", descending: true)
+        .snapshots();
+  }
+
+  deleteSavedBook(documentId) async {
+    await _firestore.collection("SaveList").doc(documentId).delete();
+  }
+
+  addBookToFavoriteList({
+    @required String bookIsbn,
+    @required String bookTitle,
+    @required String bookImage,
+    @required String bookDescription,
+    @required String bookAuthor,
+    @required String bookCategory,
+    @required String bookLanguage,
+    @required String bookPublisher,
+    @required String bookYearOfPublication,
+  }) async {
+    _firestore.collection("FavoriteList").add({
+      "createdAt": Timestamp.now(),
+      "bookIsbn": bookIsbn,
+      "bookTitle": bookTitle,
+      "bookImage": bookImage,
+      "bookDescription": bookDescription,
+      "bookAuthor": bookAuthor,
+      "bookCategory": bookCategory,
+      "bookLanguage": bookLanguage,
+      "bookPublisher": bookPublisher,
+      "bookYearOfPublication": bookYearOfPublication,
+    });
+  }
+
+  Stream<QuerySnapshot> loadFavoriteBooks() {
+    return _firestore
+        .collection("FavoriteList")
+        .orderBy("createdAt", descending: true)
+        .snapshots();
+  }
+
+  deleteFavoriteBook(documentId) async {
+    await _firestore.collection("FavoriteList").doc(documentId).delete();
+  }
 }

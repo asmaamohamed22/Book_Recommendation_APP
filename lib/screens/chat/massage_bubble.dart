@@ -23,6 +23,8 @@ class MessageBubble extends StatelessWidget {
             children: [
               Container(
                 width: 150,
+                // constraints: BoxConstraints(
+                //   maxWidth: MediaQuery.of(context).size.width * 0.5),
                 decoration: BoxDecoration(
                   color: isMe ? kBackground2 : kBackground1,
                   borderRadius: BorderRadius.only(

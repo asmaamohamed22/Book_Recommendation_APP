@@ -159,7 +159,7 @@ class _ContactUsState extends State<ContactUs> {
                                   ),
                                 );
                               });
-                              feedbackProvider.addNotification("Notification");
+                              feedbackProvider.addCount();
                             }
                           },
                         )

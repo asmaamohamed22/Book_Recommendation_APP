@@ -1,4 +1,5 @@
 import 'package:book_recommend/adminPages/AdminWidgets/gridDashboard.dart';
+import 'package:book_recommend/adminPages/AdminWidgets/notification_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -49,6 +50,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ],
                 ),
+                Notifications(),
               ],
             ),
           ),

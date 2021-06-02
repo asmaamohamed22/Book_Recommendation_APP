@@ -1,5 +1,5 @@
 import 'package:book_recommend/adminPages/models/book.dart';
-
+import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +18,7 @@ class _DetailsState extends State<Details> {
   }
 
   Book book;
+  final _store = Store();
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -76,7 +77,29 @@ class _DetailsState extends State<Details> {
                                   size: 30,
                                   color: kBackground2,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  _store
+                                      .addBookToSaveList(
+                                    bookIsbn: book.bIsbn,
+                                    bookTitle: book.bTitle,
+                                    bookImage: book.bImage,
+                                    bookDescription: book.bDescription,
+                                    bookAuthor: book.bAuthor,
+                                    bookPublisher: book.bPublisher,
+                                    bookCategory: book.bCategory,
+                                    bookLanguage: book.bLanguage,
+                                    bookYearOfPublication:
+                                        book.byear_of_publication,
+                                  )
+                                      .then((value) {
+                                    _scaffoldKey.currentState.showSnackBar(
+                                      SnackBar(
+                                        content:
+                                            Text("Book Saved successfully"),
+                                      ),
+                                    );
+                                  });
+                                },
                               ),
                             ),
                             SizedBox(
@@ -92,7 +115,46 @@ class _DetailsState extends State<Details> {
                                   color: kBackground2,
                                   size: 30,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  List<Book> books = [];
+                                  bool exist = false;
+                                  var booksInFavorite = books;
+                                  for (var bookInFavorite in booksInFavorite) {
+                                    if (bookInFavorite.bTitle == book.bTitle) {
+                                      exist = true;
+                                    }
+                                  }
+                                  if (exist) {
+                                    _scaffoldKey.currentState.showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            "This Book is in the favorite list yest"),
+                                      ),
+                                    );
+                                  } else {
+                                    _store
+                                        .addBookToFavoriteList(
+                                      bookIsbn: book.bIsbn,
+                                      bookTitle: book.bTitle,
+                                      bookImage: book.bImage,
+                                      bookDescription: book.bDescription,
+                                      bookAuthor: book.bAuthor,
+                                      bookPublisher: book.bPublisher,
+                                      bookCategory: book.bCategory,
+                                      bookLanguage: book.bLanguage,
+                                      bookYearOfPublication:
+                                          book.byear_of_publication,
+                                    )
+                                        .then((value) {
+                                      _scaffoldKey.currentState.showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                              "Book Add to Favorite List successfully"),
+                                        ),
+                                      );
+                                    });
+                                  }
+                                },
                               ),
                             ),
                           ],

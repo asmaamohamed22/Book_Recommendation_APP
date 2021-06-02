@@ -33,32 +33,69 @@ class _NewMessageState extends State<NewMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      height: 80,
       child: Row(
         children: [
           Expanded(
-            child: TextField(
-              controller: _controller,
-              autocorrect: true,
-              enableSuggestions: true,
-              decoration: kTextFieldDecoration.copyWith(
-                  hintText: "Send a message",
-                  border: const OutlineInputBorder()),
-              onChanged: (value) {
-                setState(() {
-                  _enteredMessage = value;
-                });
-              },
+            child: Container(
+              height: 60,
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 1,
+                  color: Colors.grey[500],
+                ),
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.emoji_emotions_outlined,
+                    color: Colors.grey[500],
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      autocorrect: true,
+                      enableSuggestions: true,
+                      decoration: InputDecoration(
+                        hintText: "Type your message .....",
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          _enteredMessage = value;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          IconButton(
-            icon: Icon(
-              Icons.send,
-              size: 30,
+          SizedBox(
+            width: 15,
+          ),
+          CircleAvatar(
+            radius: 20,
+            backgroundColor: kBackground2,
+            child: IconButton(
+              icon: Icon(
+                Icons.send,
+                color: Colors.white,
+                size: 25,
+              ),
+              onPressed: () =>
+                  _enteredMessage.trim().isEmpty ? null : _sendMessage(),
             ),
-            onPressed: () =>
-                _enteredMessage.trim().isEmpty ? null : _sendMessage(),
           ),
         ],
       ),
