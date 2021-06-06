@@ -23,6 +23,9 @@ class SkipContent extends StatelessWidget {
           // height: getProportionateScreenHeight(80),
           width: getProportionateScreenWidth(150),
         ),
+        SizedBox(
+          height: 20,
+        ),
         Text(
           text,
           textAlign: TextAlign.center,

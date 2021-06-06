@@ -45,6 +45,7 @@ dependencies:
   emoji_picker: ^0.1.0
   flutter_keyboard_visibility: ^3.2.2
   http: ^0.12.2
+  shimmer: ^1.0.1
   
 dev_dependencies:
   flutter_test:

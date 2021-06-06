@@ -2,6 +2,7 @@ import 'package:book_recommend/adminPages/models/book.dart';
 import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,37 @@ class _DetailsState extends State<Details> {
   @override
   void initState() {
     super.initState();
+    getAllFave();
+    getAllSave();
+  }
+
+  List<Map<String, dynamic>> allBooksToFav = [];
+
+  void getAllFave() async {
+    QuerySnapshot snapShot = await _store.getAllFavorites();
+
+    List<QueryDocumentSnapshot> allBooksInFav = snapShot.docs;
+
+    allBooksInFav.forEach((element) {
+      print("=-=-=-=-=> ${element.data().toString()}");
+      setState(() {
+        allBooksToFav.add(element.data());
+      });
+    });
+  }
+
+  List<Map<String, dynamic>> allBooksToSave = [];
+  void getAllSave() async {
+    QuerySnapshot snapShot = await _store.getAllSaves();
+
+    List<QueryDocumentSnapshot> allBooksInSave = snapShot.docs;
+
+    allBooksInSave.forEach((element) {
+      print("=-=-=-=-=> ${element.data().toString()}");
+      setState(() {
+        allBooksToSave.add(element.data());
+      });
+    });
   }
 
   Book book;
@@ -78,27 +110,39 @@ class _DetailsState extends State<Details> {
                                   color: kBackground2,
                                 ),
                                 onPressed: () {
-                                  _store
-                                      .addBookToSaveList(
-                                    bookIsbn: book.bIsbn,
-                                    bookTitle: book.bTitle,
-                                    bookImage: book.bImage,
-                                    bookDescription: book.bDescription,
-                                    bookAuthor: book.bAuthor,
-                                    bookPublisher: book.bPublisher,
-                                    bookCategory: book.bCategory,
-                                    bookLanguage: book.bLanguage,
-                                    bookYearOfPublication:
-                                        book.byear_of_publication,
-                                  )
-                                      .then((value) {
+                                  int bookIndex = allBooksToSave.indexWhere(
+                                      (element) =>
+                                          element["bookTitle"] == book.bTitle);
+                                  if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
-                                        content:
-                                            Text("Book Saved successfully"),
+                                        content: Text(
+                                            "This Book is in the Save list"),
                                       ),
                                     );
-                                  });
+                                  } else {
+                                    _store
+                                        .addBookToSaveList(
+                                      bookIsbn: book.bIsbn,
+                                      bookTitle: book.bTitle,
+                                      bookImage: book.bImage,
+                                      bookDescription: book.bDescription,
+                                      bookAuthor: book.bAuthor,
+                                      bookPublisher: book.bPublisher,
+                                      bookCategory: book.bCategory,
+                                      bookLanguage: book.bLanguage,
+                                      bookYearOfPublication:
+                                          book.byear_of_publication,
+                                    )
+                                        .then((value) {
+                                      _scaffoldKey.currentState.showSnackBar(
+                                        SnackBar(
+                                          content:
+                                              Text("Book Saved Successfully"),
+                                        ),
+                                      );
+                                    });
+                                  }
                                 },
                               ),
                             ),
@@ -116,19 +160,14 @@ class _DetailsState extends State<Details> {
                                   size: 30,
                                 ),
                                 onPressed: () {
-                                  List<Book> books = [];
-                                  bool exist = false;
-                                  var booksInFavorite = books;
-                                  for (var bookInFavorite in booksInFavorite) {
-                                    if (bookInFavorite.bTitle == book.bTitle) {
-                                      exist = true;
-                                    }
-                                  }
-                                  if (exist) {
+                                  int bookIndex = allBooksToFav.indexWhere(
+                                      (element) =>
+                                          element["bookISBN"] == book.bIsbn);
+                                  if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                            "This Book is in the favorite list yest"),
+                                            "This Book is in the favorite list"),
                                       ),
                                     );
                                   } else {
@@ -148,8 +187,8 @@ class _DetailsState extends State<Details> {
                                         .then((value) {
                                       _scaffoldKey.currentState.showSnackBar(
                                         SnackBar(
-                                          content: Text(
-                                              "Book Add to Favorite List successfully"),
+                                          content:
+                                              Text("Book Added Successfully"),
                                         ),
                                       );
                                     });

@@ -199,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TextFormField(
                           controller: phoneNumber,
                           decoration: kTextFieldDecoration.copyWith(
-                            hintText: 'Phonenumber',
+                            hintText: 'Phone Number',
                             prefixIcon: Icon(
                               Icons.phone,
                               color: kBackground2,

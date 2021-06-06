@@ -13,64 +13,68 @@ class MessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 7),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Stack(
         overflow: Overflow.visible,
         children: [
-          Row(
-            mainAxisAlignment:
-                isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-            children: [
-              Container(
-                width: 150,
-                // constraints: BoxConstraints(
-                //   maxWidth: MediaQuery.of(context).size.width * 0.5),
-                decoration: BoxDecoration(
-                  color: isMe ? kBackground2 : kBackground1,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                    bottomLeft:
-                        !isMe ? Radius.circular(0) : Radius.circular(15),
-                    bottomRight:
-                        isMe ? Radius.circular(0) : Radius.circular(15),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment:
+                  isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+              children: [
+                Container(
+                  // width: 150,
+                  constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.5),
+                  decoration: BoxDecoration(
+                    color: isMe ? kBackground2 : kBackground1,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                      bottomLeft:
+                          !isMe ? Radius.circular(0) : Radius.circular(15),
+                      bottomRight:
+                          isMe ? Radius.circular(0) : Radius.circular(15),
+                    ),
                   ),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-                margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                child: Column(
-                  crossAxisAlignment:
-                      isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      userName,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: !isMe ? Colors.white : Colors.white,
-                          fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      mesage,
-                      style: TextStyle(
-                          color: !isMe ? Colors.white : Colors.white,
-                          fontSize: 15),
-                      textAlign: !isMe ? TextAlign.end : TextAlign.start,
-                    ),
-                  ],
-                ),
-              )
-            ],
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                  margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  child: Column(
+                    crossAxisAlignment: isMe
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        userName,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: !isMe ? Colors.white : Colors.white,
+                            fontSize: 14),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        mesage,
+                        style: TextStyle(
+                            color: !isMe ? Colors.white : Colors.white,
+                            fontSize: 15),
+                        textAlign: !isMe ? TextAlign.end : TextAlign.start,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
           Positioned(
-            top: -5,
-            left: isMe ? MediaQuery.of(context).viewPadding.left + 215 : null,
-            right: !isMe ? MediaQuery.of(context).viewPadding.left + 215 : null,
+            bottom: -5,
+            left: !isMe ? MediaQuery.of(context).viewPadding.left : null,
+            right: isMe ? MediaQuery.of(context).viewPadding.left : null,
             child: CircleAvatar(
-              radius: 20,
-              backgroundImage: userImage == null
+              radius: 15,
+              backgroundImage: userImage == ""
                   ? AssetImage('assets/images/userImage.png')
                   : NetworkImage(userImage),
             ),

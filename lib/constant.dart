@@ -37,3 +37,5 @@ const kFeedbackName = 'feedbackName';
 const kFeedbackEmail = 'feedbackEmail';
 const kFeedbackMessage = 'feedbackMessage';
 const kTime = 'createdAt';
+const userId = 'userId';
+const bookName = 'bookName';

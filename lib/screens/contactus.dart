@@ -155,10 +155,11 @@ class _ContactUsState extends State<ContactUs> {
                                   .then((value) {
                                 _scaffoldKey.currentState.showSnackBar(
                                   SnackBar(
-                                    content: Text("Message added successfully"),
+                                    content: Text("Message Send successfully"),
                                   ),
                                 );
                               });
+                              feedbackProvider.addNotification("Notification");
                               feedbackProvider.addCount();
                             }
                           },

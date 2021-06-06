@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:book_recommend/adminPages/models/book.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Store {
@@ -51,7 +52,9 @@ class Store {
     @required String bookLanguage,
     @required String bookPublisher,
     @required String bookYearOfPublication,
+    String userSaveId,
   }) async {
+    final user = FirebaseAuth.instance.currentUser;
     _firestore.collection("SaveList").add({
       "createdAt": Timestamp.now(),
       "bookIsbn": bookIsbn,
@@ -63,6 +66,7 @@ class Store {
       "bookLanguage": bookLanguage,
       "bookPublisher": bookPublisher,
       "bookYearOfPublication": bookYearOfPublication,
+      "userSaveId": user.uid,
     });
   }
 
@@ -71,6 +75,10 @@ class Store {
         .collection("SaveList")
         .orderBy("createdAt", descending: true)
         .snapshots();
+  }
+
+  Future<QuerySnapshot> getAllSaves() {
+    return _firestore.collection("SaveList").get();
   }
 
   deleteSavedBook(documentId) async {
@@ -87,7 +95,9 @@ class Store {
     @required String bookLanguage,
     @required String bookPublisher,
     @required String bookYearOfPublication,
+    String userFavoriteId,
   }) async {
+    final user = FirebaseAuth.instance.currentUser;
     _firestore.collection("FavoriteList").add({
       "createdAt": Timestamp.now(),
       "bookIsbn": bookIsbn,
@@ -99,6 +109,7 @@ class Store {
       "bookLanguage": bookLanguage,
       "bookPublisher": bookPublisher,
       "bookYearOfPublication": bookYearOfPublication,
+      "userFavoriteId": user.uid,
     });
   }
 
@@ -107,6 +118,14 @@ class Store {
         .collection("FavoriteList")
         .orderBy("createdAt", descending: true)
         .snapshots();
+  }
+
+  Stream<QuerySnapshot> loadInterestBooks() {
+    return _firestore.collection("Interest").snapshots();
+  }
+
+  Future<QuerySnapshot> getAllFavorites() {
+    return _firestore.collection("FavoriteList").get();
   }
 
   deleteFavoriteBook(documentId) async {

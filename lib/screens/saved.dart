@@ -5,6 +5,7 @@ import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/details.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,22 +57,26 @@ class _SaveState extends State<Save> {
       body: StreamBuilder<QuerySnapshot>(
           stream: _store.loadSaveBooks(),
           builder: (context, snapshot) {
+            final user = FirebaseAuth.instance.currentUser;
+            print("current user id =-=-=> ${user.uid}");
             if (snapshot.hasData) {
               List<Book> books = [];
               for (var doc in snapshot.data.docs) {
                 var data = doc.data();
-                books.add(Book(
-                  bId: doc.id,
-                  bImage: data[kBookImage],
-                  bTitle: data[kBookTitle],
-                  bDescription: data[kBookDescription],
-                  bPublisher: data[kBookPublisher],
-                  bAuthor: data[kBookAuthor],
-                  bCategory: data[kBookCategory],
-                  bIsbn: data[kBookIsbn],
-                  byear_of_publication: data[kBookYearOfPublication],
-                  bLanguage: data[kBookLanguage],
-                ));
+                if (user.uid == data["userSaveId"]) {
+                  books.add(Book(
+                    bId: doc.id,
+                    bImage: data[kBookImage],
+                    bTitle: data[kBookTitle],
+                    bDescription: data[kBookDescription],
+                    bPublisher: data[kBookPublisher],
+                    bAuthor: data[kBookAuthor],
+                    bCategory: data[kBookCategory],
+                    bIsbn: data[kBookIsbn],
+                    byear_of_publication: data[kBookYearOfPublication],
+                    bLanguage: data[kBookLanguage],
+                  ));
+                }
               }
               return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

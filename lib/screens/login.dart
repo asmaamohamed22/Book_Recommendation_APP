@@ -1,13 +1,10 @@
 import 'package:book_recommend/adminPages/Dashboard.dart';
 import 'package:book_recommend/constant.dart';
-import 'package:book_recommend/logs/facebook.dart';
-import 'package:book_recommend/logs/google.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/screens/register.dart';
 import 'package:book_recommend/screens/reset.dart';
 import 'package:book_recommend/widgets/haveaccountornot.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
-import 'package:book_recommend/widgets/orDivider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -253,17 +250,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pushReplacementNamed(
                             context, RegisterScreen.id);
                       },
-                    ),
-                    SizedBox(
-                      height: size.height * 0.01,
-                    ),
-                    OrDivider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        GoogleSign(),
-                        FaceBook(),
-                      ],
                     ),
                   ],
                 ),

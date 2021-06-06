@@ -1,5 +1,6 @@
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:book_recommend/adminPages/models/book.dart';
 import 'package:book_recommend/adminPages/services/store.dart';
@@ -45,25 +46,28 @@ class _FavoriteState extends State<Favorite> {
       body: StreamBuilder<QuerySnapshot>(
         stream: _store.loadFavoriteBooks(),
         builder: (context, snapshot) {
+          final user = FirebaseAuth.instance.currentUser;
+          print("current user id =-=-=> ${user.uid}");
           if (snapshot.hasData) {
             List<Book> books = [];
-
             for (var doc in snapshot.data.docs) {
               var data = doc.data();
-
-              books.add(Book(
-                bId: doc.id,
-                bImage: data[kBookImage],
-                bTitle: data[kBookTitle],
-                bDescription: data[kBookDescription],
-                bPublisher: data[kBookPublisher],
-                bAuthor: data[kBookAuthor],
-                bCategory: data[kBookCategory],
-                bIsbn: data[kBookIsbn],
-                byear_of_publication: data[kBookYearOfPublication],
-                bLanguage: data[kBookLanguage],
-              ));
+              if (user.uid == data["userFavoriteId"]) {
+                books.add(Book(
+                  bId: doc.id,
+                  bImage: data[kBookImage],
+                  bTitle: data[kBookTitle],
+                  bDescription: data[kBookDescription],
+                  bPublisher: data[kBookPublisher],
+                  bAuthor: data[kBookAuthor],
+                  bCategory: data[kBookCategory],
+                  bIsbn: data[kBookIsbn],
+                  byear_of_publication: data[kBookYearOfPublication],
+                  bLanguage: data[kBookLanguage],
+                ));
+              }
             }
+
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
@@ -126,12 +130,12 @@ class _FavoriteState extends State<Favorite> {
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 30),
+                                        EdgeInsets.symmetric(horizontal: 40),
                                     child: IconButton(
                                       icon: Icon(
-                                        Icons.delete,
+                                        Icons.favorite_rounded,
                                         color: Colors.red,
-                                        size: 30,
+                                        size: 35,
                                       ),
                                       onPressed: () {
                                         _store
@@ -163,7 +167,7 @@ class _FavoriteState extends State<Favorite> {
             );
           } else {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Text('Favorite List Is Empty'),
             );
           }
         },

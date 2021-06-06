@@ -16,59 +16,61 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Container(
-        height: size.height,
-        width: double.infinity,
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/skip/logo.png',
-                        width: size.width * 0.5,
-                        height: size.width * 0.4,
-                      ),
-                      SizedBox(
-                        height: size.height * 0.07,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text(
-                          'Get the best recommendation for book!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 32.0,
-                            fontWeight: FontWeight.bold,
-                            color: kBackground2,
+      body: SingleChildScrollView(
+        child: Container(
+          height: size.height,
+          width: double.infinity,
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/skip/logo.png',
+                          width: size.width * 0.5,
+                          height: size.width * 0.4,
+                        ),
+                        SizedBox(
+                          height: size.height * 0.07,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Text(
+                            'Get the best recommendation for book!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 32.0,
+                              fontWeight: FontWeight.bold,
+                              color: kBackground2,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: size.height * 0.08,
-                ),
-                RoundedButton(
-                  text: 'Login',
-                  press: () {
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  },
-                  color: kBackground2,
-                  textColor: Colors.white,
-                ),
-                SizedBox(
-                  height: size.height * 0.01,
-                ),
-                LoginButton(),
-              ],
-            ),
-          ],
+                  SizedBox(
+                    height: size.height * 0.08,
+                  ),
+                  RoundedButton(
+                    text: 'Login',
+                    press: () {
+                      Navigator.pushNamed(context, LoginScreen.id);
+                    },
+                    color: kBackground2,
+                    textColor: Colors.white,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  LoginButton(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -2,7 +2,6 @@ import 'package:book_recommend/adminPages/AdminWidgets/adminContent.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/setting/darkmode.dart';
-import 'package:book_recommend/setting/managePassword.dart';
 import 'package:flutter/material.dart';
 
 class Setting extends StatefulWidget {
@@ -39,7 +38,7 @@ class _SettingState extends State<Setting> {
         elevation: 0.0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Stack(
           children: [
             Column(
@@ -47,7 +46,7 @@ class _SettingState extends State<Setting> {
                 AdminContent(
                   name: 'Dark Mode',
                   icon: Icon(
-                    Icons.lightbulb,
+                    Icons.brightness_4_outlined,
                     color: Colors.white,
                     size: 35,
                   ),
@@ -57,17 +56,6 @@ class _SettingState extends State<Setting> {
                 ),
                 SizedBox(
                   width: 20,
-                ),
-                AdminContent(
-                  name: 'Manage Password',
-                  icon: Icon(
-                    Icons.lock,
-                    color: Colors.white,
-                    size: 35,
-                  ),
-                  ontap: () {
-                    Navigator.pushReplacementNamed(context, ManagePassword.id);
-                  },
                 ),
               ],
             ),

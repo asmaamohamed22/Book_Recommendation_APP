@@ -12,6 +12,7 @@ class Book {
   String bPublisher;
   // ignore: non_constant_identifier_names
   String byear_of_publication;
+  String userId;
 
   Book({
     this.bId,
@@ -25,5 +26,6 @@ class Book {
     @required this.bPublisher,
     // ignore: non_constant_identifier_names
     @required this.byear_of_publication,
+    this.userId,
   });
 }

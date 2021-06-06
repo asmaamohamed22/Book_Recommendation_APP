@@ -8,12 +8,15 @@ import 'package:book_recommend/adminPages/viewFeedback.dart';
 import 'package:book_recommend/providers/notification_provider.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/providers/theme_provider.dart';
+import 'package:book_recommend/screens/Recommendation.dart';
+import 'package:book_recommend/screens/Search.dart';
 import 'package:book_recommend/screens/about.dart';
 import 'package:book_recommend/screens/chat/chatScreen.dart';
 import 'package:book_recommend/screens/contactus.dart';
 import 'package:book_recommend/screens/details.dart';
 import 'package:book_recommend/screens/favorite.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/screens/interest.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/register.dart';
@@ -23,7 +26,6 @@ import 'package:book_recommend/screens/skip.dart';
 import 'package:book_recommend/screens/splash.dart';
 import 'package:book_recommend/screens/welcome.dart';
 import 'package:book_recommend/setting/darkmode.dart';
-import 'package:book_recommend/setting/managePassword.dart';
 import 'package:book_recommend/setting/setting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +90,6 @@ class MyBook extends StatelessWidget {
               Save.id: (context) => Save(),
               Favorite.id: (context) => Favorite(),
               Setting.id: (context) => Setting(),
-              ManagePassword.id: (context) => ManagePassword(),
               ResetPassword.id: (context) => ResetPassword(),
               Dashboard.id: (context) => Dashboard(),
               AddBook.id: (context) => AddBook(),
@@ -98,6 +99,9 @@ class MyBook extends StatelessWidget {
               ViewFeedback.id: (context) => ViewFeedback(),
               DarkMode.id: (context) => DarkMode(),
               AdminMode.id: (context) => AdminMode(),
+              Recommendation.id: (context) => Recommendation(),
+              SearchScreen.id: (context) => SearchScreen(),
+              InterestBook.id: (context) => InterestBook(),
             },
           );
         });

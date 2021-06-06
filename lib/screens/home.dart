@@ -3,11 +3,14 @@ import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/models/usermodel.dart';
 import 'package:book_recommend/providers/provider.dart';
+import 'package:book_recommend/screens/Recommendation.dart';
+import 'package:book_recommend/screens/Search.dart';
 import 'package:book_recommend/screens/about.dart';
 import 'package:book_recommend/screens/chat/chatScreen.dart';
 import 'package:book_recommend/screens/contactus.dart';
 import 'package:book_recommend/screens/details.dart';
 import 'package:book_recommend/screens/favorite.dart';
+import 'package:book_recommend/screens/interest.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/saved.dart';
@@ -76,6 +79,38 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 title: Text(
                   'Room',
+                  style: TextStyle(
+                    color: Theme.of(context).backgroundColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, Recommendation.id);
+                },
+                leading: Icon(
+                  Icons.book_outlined,
+                  color: kBackground2,
+                ),
+                title: Text(
+                  'Recommend',
+                  style: TextStyle(
+                    color: Theme.of(context).backgroundColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, InterestBook.id);
+                },
+                leading: Icon(
+                  Icons.star_border,
+                  color: kBackground2,
+                ),
+                title: Text(
+                  'Interests',
                   style: TextStyle(
                     color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
@@ -180,19 +215,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 40),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Image.asset(
-                      'assets/skip/logo.png',
-                      height: 40,
-                      width: 40,
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),
@@ -256,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               children: [
                 Container(
-                  height: size.height * 0.3,
+                  height: size.height * 0.28,
                   child: Stack(
                     children: [
                       Container(
@@ -291,11 +313,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   IconButton(
                                     icon: Icon(
-                                      Icons.recommend,
+                                      Icons.search_outlined,
                                       color: Colors.white,
                                       size: 35,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, SearchScreen.id);
+                                    },
                                   ),
                                 ],
                               ),
@@ -313,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       CircleAvatar(
-                                        radius: 40,
+                                        radius: 45,
                                         backgroundColor: Colors.white,
                                         backgroundImage: AssetImage(
                                           'assets/skip/home.png',
@@ -340,41 +365,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        left: 0,
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                          margin: EdgeInsets.symmetric(horizontal: 25),
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(50),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(0, 3),
-                                  blurRadius: 5,
-                                  color: kBackground2.withOpacity(0.5))
-                            ],
-                          ),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              hintStyle:
-                                  TextStyle(color: kBackground2, fontSize: 18),
-                              hintText: 'Search',
-                              suffixIcon: Icon(
-                                Icons.search,
-                                color: kBackground2,
-                                size: 30,
-                              ),
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -383,15 +373,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          "Recommended",
+                          "Discover Latest Books",
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).backgroundColor),
                         ),
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       Expanded(
                         child: StreamBuilder<QuerySnapshot>(
@@ -415,87 +407,79 @@ class _HomeScreenState extends State<HomeScreen> {
                                     bLanguage: data[kBookLanguage],
                                   ));
                                 }
-                                return Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 6),
-                                  child: GridView.builder(
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 0.85,
-                                    ),
-                                    itemBuilder: (context, index) => Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 5),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                              context, Details.id,
-                                              arguments: books[index]);
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(30)),
-                                          child: Stack(
-                                            children: [
-                                              Positioned.fill(
-                                                child:
-                                                    books[index].bImage == null
-                                                        ? Container()
-                                                        : Image(
-                                                            fit: BoxFit.fill,
-                                                            image: NetworkImage(
-                                                                books[index]
-                                                                    .bImage),
-                                                          ),
-                                              ),
-                                              Positioned(
-                                                bottom: 0,
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: 60,
-                                                  color: Colors.black87,
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 10,
-                                                            vertical: 4),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          books[index].bTitle,
-                                                          style: TextStyle(
-                                                            color: kBackground2,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 15,
-                                                          ),
-                                                        ),
-                                                        SizedBox(height: 3),
-                                                        Text(
-                                                          books[index].bAuthor,
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 14,
-                                                          ),
-                                                        ),
-                                                      ],
+                                return GridView.builder(
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.8,
+                                  ),
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 5),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(context, Details.id,
+                                            arguments: books[index]);
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(30)),
+                                        child: Stack(
+                                          children: [
+                                            Positioned.fill(
+                                              child: books[index].bImage == null
+                                                  ? Container()
+                                                  : Image(
+                                                      fit: BoxFit.fill,
+                                                      image: NetworkImage(
+                                                          books[index].bImage),
                                                     ),
+                                            ),
+                                            Positioned(
+                                              bottom: 0,
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                height: 60,
+                                                color: Colors.black87,
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 4),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        books[index].bTitle,
+                                                        style: TextStyle(
+                                                          color: kBackground2,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 3),
+                                                      Text(
+                                                        books[index].bAuthor,
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                    itemCount: books.length,
                                   ),
+                                  itemCount: books.length,
                                 );
                               } else {
                                 return Center(
