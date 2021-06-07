@@ -375,7 +375,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          "Discover Latest Books",
+                          "New",
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

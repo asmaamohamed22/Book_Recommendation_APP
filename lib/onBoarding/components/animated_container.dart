@@ -1,4 +1,3 @@
-import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';

@@ -51,7 +51,7 @@ class MainContent extends StatelessWidget {
               style: TextStyle(
                   color: kLightGreyColor,
                   fontWeight: FontWeight.w400,
-                  fontSize: SizeConfig.defaultSize * 1.4),
+                  fontSize: SizeConfig.defaultSize * 1.6),
             ),
           ),
         ],
