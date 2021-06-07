@@ -39,7 +39,7 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    // Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: Container(
@@ -50,43 +50,24 @@ class _SplashState extends State<Splash> {
               width: double.infinity,
               height: double.infinity,
               child: Opacity(
-                opacity: 0.5,
+                opacity: 0.3,
                 child: Image.asset(
                   'assets/images/background.jpg',
                   fit: BoxFit.fill,
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //Image.asset(
-                //   'assets/icons/rlogo.png',
-                //  height: 120,
-                //  ),
-                Shimmer.fromColors(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Recme',
-                      style: TextStyle(
-                        fontFamily: 'pacifico',
-                        fontSize: 60,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 15,
-                            color: kBackground1,
-                            offset: Offset.fromDirection(120, 12),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  baseColor: kBackground2,
-                  highlightColor: kBackground1,
+            Shimmer.fromColors(
+              child: Container(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  'assets/skip/logo.png',
+                  width: size.width * 0.4,
+                  height: size.width * 0.3,
                 ),
-              ],
+              ),
+              baseColor: kBackground2,
+              highlightColor: kBackground1,
             ),
           ],
         ),
