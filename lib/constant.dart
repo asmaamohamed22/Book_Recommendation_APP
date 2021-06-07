@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 Color kBackground1 = Color(0xFF6DB9CB);
 Color kBackground2 = Color(0xFF06597B);
 Color kBackground3 = Color(0xFFD6D8D8);
+Color kTextColor = Color(0xFF4A4A4A);
+Color kLightGreyColor = Color(0xFF848484);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 const kTextFieldDecoration = InputDecoration(

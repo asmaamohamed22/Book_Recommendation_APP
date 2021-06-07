@@ -92,6 +92,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.5"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -232,7 +239,7 @@ packages:
       name: google_fonts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "1.1.2"
   google_sign_in:
     dependency: "direct main"
     description:
@@ -422,6 +429,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
+  sa_v1_migration:
+    dependency: transitive
+    description:
+      name: sa_v1_migration
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2"
   shared_preferences:
     dependency: transitive
     description:
@@ -471,6 +485,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
+  simple_animations:
+    dependency: "direct main"
+    description:
+      name: simple_animations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.5.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -504,6 +525,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety.1"
+  supercharged:
+    dependency: transitive
+    description:
+      name: supercharged
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.12.0"
+  supercharged_dart:
+    dependency: transitive
+    description:
+      name: supercharged_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.0"
   term_glyph:
     dependency: transitive
     description:

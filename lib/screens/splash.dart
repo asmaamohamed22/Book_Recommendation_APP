@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:book_recommend/constant.dart';
-import 'package:book_recommend/screens/skip.dart';
+import 'package:book_recommend/onBoarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => SkipScreen(),
+        builder: (context) => OnboardingScreen(),
       ),
     );
   }
@@ -57,26 +57,36 @@ class _SplashState extends State<Splash> {
                 ),
               ),
             ),
-            Shimmer.fromColors(
-              child: Container(
-                alignment: Alignment.center,
-                child: Text(
-                  'Recme',
-                  style: TextStyle(
-                    fontFamily: 'pacifico',
-                    fontSize: 80,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 15,
-                        color: kBackground1,
-                        offset: Offset.fromDirection(120, 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //Image.asset(
+                //   'assets/icons/rlogo.png',
+                //  height: 120,
+                //  ),
+                Shimmer.fromColors(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Recme',
+                      style: TextStyle(
+                        fontFamily: 'pacifico',
+                        fontSize: 60,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 15,
+                            color: kBackground1,
+                            offset: Offset.fromDirection(120, 12),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
+                  baseColor: kBackground2,
+                  highlightColor: kBackground1,
                 ),
-              ),
-              baseColor: kBackground2,
-              highlightColor: kBackground1,
+              ],
             ),
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:book_recommend/adminPages/bookDetails.dart';
 import 'package:book_recommend/adminPages/editBook.dart';
 import 'package:book_recommend/adminPages/viewBook.dart';
 import 'package:book_recommend/adminPages/viewFeedback.dart';
+import 'package:book_recommend/onBoarding/onboarding_screen.dart';
 import 'package:book_recommend/providers/notification_provider.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/providers/theme_provider.dart';
@@ -22,7 +23,6 @@ import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/register.dart';
 import 'package:book_recommend/screens/reset.dart';
 import 'package:book_recommend/screens/saved.dart';
-import 'package:book_recommend/screens/skip.dart';
 import 'package:book_recommend/screens/splash.dart';
 import 'package:book_recommend/screens/welcome.dart';
 import 'package:book_recommend/setting/darkmode.dart';
@@ -76,7 +76,7 @@ class MyBook extends StatelessWidget {
             ),
             routes: {
               Splash.id: (context) => Splash(),
-              SkipScreen.id: (context) => SkipScreen(),
+              OnboardingScreen.id: (context) => OnboardingScreen(),
               WelcomeScreen.id: (context) => WelcomeScreen(),
               LoginScreen.id: (context) => LoginScreen(),
               RegisterScreen.id: (context) => RegisterScreen(),

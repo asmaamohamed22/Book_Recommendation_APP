@@ -53,7 +53,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.08,
+                    height: size.height * 0.06,
+                  ),
+                  Text(
+                    'Start Your Journey',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: kLightGreyColor,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
                   ),
                   RoundedButton(
                     text: 'Login',

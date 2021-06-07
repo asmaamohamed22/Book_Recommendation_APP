@@ -38,7 +38,7 @@ dependencies:
   carousel_slider: ^2.3.1
   google_sign_in: ^4.5.5
   image_picker: ^0.6.7+12
-  google_fonts: ^0.2.0
+  google_fonts: ^1.1.0
   badges: ^1.2.0
   firebase_messaging: ^7.0.3
   flutter_svg: ^0.19.1
@@ -46,6 +46,7 @@ dependencies:
   flutter_keyboard_visibility: ^3.2.2
   http: ^0.12.2
   shimmer: ^1.0.1
+  simple_animations: ^2.2.2
   
 dev_dependencies:
   flutter_test:
