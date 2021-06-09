@@ -33,13 +33,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         FadeAnimation(
                           0.4,
                           Image.asset(
-                            'assets/skip/logo.png',
-                            width: size.width * 0.5,
-                            height: size.width * 0.4,
+                            'assets/skip/Welcome-bro.png',
+                            height: size.width * 0.8,
                           ),
-                        ),
-                        SizedBox(
-                          height: size.height * 0.07,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),

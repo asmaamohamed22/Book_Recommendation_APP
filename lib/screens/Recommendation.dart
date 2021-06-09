@@ -1,7 +1,5 @@
-import 'package:book_recommend/adminPages/models/intersetBook.dart';
 import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -19,10 +17,18 @@ class _RecommendationState extends State<Recommendation> {
   int bookcount;
   var jsonresponse;
   String bookname;
-  Future<void> getBooks(booknamee) async {
-    //List<Book> books = [];
-    String url = "http://10.0.2.2:5000/api/get_rec?books={1:\"$booknamee\"}";
-    http.Response response = await http.get(url);
+  String queryDec;
+  int count = 0;
+  Future<void> callUri(decString) async {
+    print("hello fro calURI");
+    print(decString);
+    http.Response response = await http.get(
+      Uri.https(
+        '192.168.1.5:5000',
+        "/api/get_rec",
+        {'books': "{$decString}"},
+      ),
+    );
     if (response.statusCode == 200) {
       setState(() {
         jsonresponse = jsonDecode(response.body);
@@ -33,9 +39,34 @@ class _RecommendationState extends State<Recommendation> {
     }
   }
 
+  void getBooks() async {
+    //List<Book> books = [];
+    //String url = "http://10.0.2.2:5000/api/get_rec?books={1:\"$booknamee\"}";
+    //creating  a list of book names
+    final _store = Store();
+    List<String> bookNames = await _store.loadInterestBooks2();
+    String decString;
+    int counter = 0;
+    for (var name in bookNames) {
+      print(name + 'inside loop');
+      if (counter != 0) {
+        decString += ",";
+      }
+      if (counter == 0) {
+        decString = (counter.toString() + ':' + '\"' + name + '\"');
+        counter += 1;
+      } else {
+        decString = decString + (counter.toString() + ':' + '\"' + name + '\"');
+        counter += 1;
+      }
+    }
+    print(decString);
+    callUri(decString);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _store = Store();
+    // final _store = Store();
     // Interest interest;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -66,44 +97,16 @@ class _RecommendationState extends State<Recommendation> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1.5,
-                      color: kBackground1,
-                    ),
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: TextField(
-                    autocorrect: true,
-                    enableSuggestions: true,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: 18.0, horizontal: 20.0),
-                      hintText: "Enter book name",
-                      border: InputBorder.none,
-                      hintStyle: TextStyle(
-                        color: Colors.grey[500],
-                      ),
-                    ),
-                    onChanged: (value) {
-                      bookname = value;
-                    },
-                    onSubmitted: (value) {
-                      print(value);
+                Center(
+                  child: MyButton(
+                    name: 'Get Books',
+                    onPressed: () {
+                      setState(() {
+                        getBooks();
+                        bookcount = null;
+                      });
                     },
                   ),
-                ),
-                SizedBox(height: 30),
-                MyButton(
-                  name: 'Recommend',
-                  onPressed: () {
-                    getBooks(bookname);
-                    setState(() {
-                      bookcount = null;
-                    });
-                  },
                 ),
                 SizedBox(height: 60),
                 Container(
@@ -126,40 +129,6 @@ class _RecommendationState extends State<Recommendation> {
                           },
                           itemCount: bookcount,
                         ),
-                ),
-                Container(
-                  height: 100,
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: _store.loadInterestBooks(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        List<Interest> interests = [];
-                        for (var doc in snapshot.data.docs) {
-                          var data = doc.data();
-                          interests.add(Interest(
-                            bookName: data[bookName],
-                          ));
-                        }
-                        return ListView.builder(
-                          itemCount: interests.length,
-                          itemBuilder: (context, index) => Container(
-                            child: Text(
-                              interests[index].bookName,
-                              style: TextStyle(
-                                color: kBackground2,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    },
-                  ),
                 ),
               ],
             ),

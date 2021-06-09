@@ -17,8 +17,14 @@ class _InterestBookState extends State<InterestBook> {
   String bookname;
   Future<void> getBooks(booknamee) async {
     //List<Book> books = [];
-    String url = "http://10.0.2.2:5000/api/get_rec?books={1:\"$booknamee\"}";
-    http.Response response = await http.get(url);
+    //String url = "http://10.0.2.2:5000/api/get_rec?books={1:\"$booknamee\"}";
+    http.Response response = await http.get(
+      Uri.https(
+        '192.168.1.5:5000',
+        "/api/get_rec",
+        {'books': "{1:\"$booknamee\"}"},
+      ),
+    );
     if (response.statusCode == 200) {
       setState(() {
         jsonresponse = jsonDecode(response.body);

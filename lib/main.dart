@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:book_recommend/adminPages/Dashboard.dart';
 import 'package:book_recommend/adminPages/addBook.dart';
 import 'package:book_recommend/adminPages/adminMode.dart';
@@ -33,9 +35,19 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:provider/provider.dart';
 
 void main() async {
+  HttpOverrides.global = new MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await firebase_core.Firebase.initializeApp();
   runApp(MyBook());
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();

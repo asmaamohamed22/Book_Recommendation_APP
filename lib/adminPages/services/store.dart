@@ -124,6 +124,17 @@ class Store {
     return _firestore.collection("Interest").snapshots();
   }
 
+  //just to test something
+  Future<List<String>> loadInterestBooks2() async {
+    List<String> bookNames = [];
+    var stream = await _firestore.collection("Interest").get();
+    for (var test in stream.docs) {
+      bookNames.add(test.data()[bookName]);
+      //print(test.data()[bookName] + " inside book2");
+    }
+    return bookNames;
+  }
+
   Future<QuerySnapshot> getAllFavorites() {
     return _firestore.collection("FavoriteList").get();
   }
