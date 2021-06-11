@@ -46,28 +46,22 @@ class _SplashState extends State<Splash> {
         alignment: Alignment.center,
         child: Stack(
           children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: Opacity(
-                opacity: 0.3,
-                child: Image.asset(
-                  'assets/images/background.jpg',
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            Shimmer.fromColors(
-              child: Container(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/skip/logo.png',
-                  width: size.width * 0.4,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/icons/backlogo.png',
                   height: size.width * 0.3,
                 ),
-              ),
-              baseColor: kBackground2,
-              highlightColor: kBackground1,
+                Shimmer.fromColors(
+                  child: Text(
+                    'Recme',
+                    style: TextStyle(fontSize: 40, fontFamily: 'pacifico'),
+                  ),
+                  baseColor: kBackground2,
+                  highlightColor: kBackground1,
+                ),
+              ],
             ),
           ],
         ),

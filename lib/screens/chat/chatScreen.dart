@@ -13,6 +13,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -20,7 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
           'Room',
           style: TextStyle(
             color: kBackground2,
-            fontSize: 25,
+            fontSize: 30,
             //fontWeight: FontWeight.bold,
             fontFamily: 'pacifico',
           ),
@@ -39,15 +40,27 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Expanded(
-              child: Messages(),
+      body: Stack(
+        children: [
+          Container(
+            alignment: Alignment.center,
+            child: Opacity(
+              opacity: 0.2,
+              child: Image.asset(
+                'assets/icons/backlogo.png',
+                height: size.width * 0.6,
+              ),
             ),
-            NewMessage(),
-          ],
-        ),
+          ),
+          Column(
+            children: [
+              Expanded(
+                child: Messages(),
+              ),
+              NewMessage(),
+            ],
+          ),
+        ],
       ),
     );
   }

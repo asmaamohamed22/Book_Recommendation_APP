@@ -150,8 +150,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: size.height * 0.03,
                     ),
                     Image.asset(
-                      'assets/skip/logo.png',
-                      width: size.width * 0.4,
+                      'assets/icons/backlogo.png',
+                      height: size.width * 0.43,
                     ),
                     SizedBox(
                       height: size.height * 0.01,

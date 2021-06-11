@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, ContactUs.id);
+                  Navigator.pushNamed(context, ContactUs.id);
                 },
                 leading: Icon(
                   Icons.mail_outline,
@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, AboutScreen.id);
+                  Navigator.pushNamed(context, AboutScreen.id);
                 },
                 leading: Icon(
                   Icons.info_outlined,
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, Setting.id);
+                  Navigator.pushNamed(context, Setting.id);
                 },
                 leading: Icon(
                   Icons.settings_outlined,
@@ -200,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ListTile(
                 onTap: () async {
                   await FirebaseAuth.instance.signOut().then((value) {
-                    Navigator.pushReplacementNamed(context, LoginScreen.id);
+                    Navigator.pushNamed(context, LoginScreen.id);
                   });
                 },
                 leading: Icon(

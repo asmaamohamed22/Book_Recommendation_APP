@@ -120,6 +120,14 @@ class Store {
         .snapshots();
   }
 
+  Future<QuerySnapshot> getAllFavorites() {
+    return _firestore.collection("FavoriteList").get();
+  }
+
+  deleteFavoriteBook(documentId) async {
+    await _firestore.collection("FavoriteList").doc(documentId).delete();
+  }
+
   Stream<QuerySnapshot> loadInterestBooks() {
     return _firestore.collection("Interest").snapshots();
   }
@@ -133,13 +141,5 @@ class Store {
       //print(test.data()[bookName] + " inside book2");
     }
     return bookNames;
-  }
-
-  Future<QuerySnapshot> getAllFavorites() {
-    return _firestore.collection("FavoriteList").get();
-  }
-
-  deleteFavoriteBook(documentId) async {
-    await _firestore.collection("FavoriteList").doc(documentId).delete();
   }
 }

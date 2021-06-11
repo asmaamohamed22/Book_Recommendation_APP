@@ -326,6 +326,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0.0,
+        centerTitle: true,
+        title: edit == false
+            ? Text(
+                'View Profile',
+                style: TextStyle(
+                    color: kBackground2,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              )
+            : Text(
+                'Update Profile',
+                style: TextStyle(
+                    color: kBackground2,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
         leading: edit == true
             ? IconButton(
                 icon: Icon(

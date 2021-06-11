@@ -50,9 +50,9 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
                   ),
                   Container(
-                    alignment: Alignment.topLeft,
+                    alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/icons/logo.png',
+                      'assets/icons/backlogo.png',
                       width: 250,
                     ),
                   ),
@@ -71,9 +71,9 @@ class _AboutScreenState extends State<AboutScreen> {
                     height: size.height * 0.01,
                   ),
                   Text(
-                    'Book Recommendation App',
+                    'Recme is book recommendation app',
                     style: TextStyle(
-                      fontSize: 22.0,
+                      fontSize: 20.0,
                       color: Theme.of(context).backgroundColor,
                     ),
                   ),
@@ -83,7 +83,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Text(
                     'Since 2021 we make people happy with our services ,This app you can get on all recommendation book that you want to be recommended for you.',
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 16.0,
                       color: Theme.of(context).backgroundColor,
                     ),
                   ),

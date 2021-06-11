@@ -47,6 +47,9 @@ dependencies:
   http: ^0.12.2
   shimmer: ^1.0.1
   simple_animations: ^2.2.2
+  hive: ^1.4.1+1
+  #used to store local state
+  path_provider: ^1.6.5
   
 dev_dependencies:
   flutter_test:

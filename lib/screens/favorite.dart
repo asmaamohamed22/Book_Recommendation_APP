@@ -1,4 +1,5 @@
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:book_recommend/screens/details.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
 class Favorite extends StatefulWidget {
   static String id = 'Favorite';
@@ -14,12 +16,20 @@ class Favorite extends StatefulWidget {
   _FavoriteState createState() => _FavoriteState();
 }
 
+BookProvider bookProvider;
+
 class _FavoriteState extends State<Favorite> {
   final _store = Store();
   Book book;
+  void getCallAllFunction() {
+    bookProvider.getUserData();
+  }
+
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    bookProvider = Provider.of<BookProvider>(context);
+    getCallAllFunction();
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -162,7 +162,7 @@ class _DetailsState extends State<Details> {
                                 onPressed: () {
                                   int bookIndex = allBooksToFav.indexWhere(
                                       (element) =>
-                                          element["bookISBN"] == book.bIsbn);
+                                          element["bookTitle"] == book.bTitle);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(

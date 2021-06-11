@@ -16,7 +16,6 @@ class Save extends StatefulWidget {
 }
 
 BookProvider bookProvider;
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _SaveState extends State<Save> {
   final _store = Store();
@@ -25,6 +24,7 @@ class _SaveState extends State<Save> {
     bookProvider.getUserData();
   }
 
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     bookProvider = Provider.of<BookProvider>(context);
@@ -43,7 +43,7 @@ class _SaveState extends State<Save> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, HomeScreen.id);
+            Navigator.pushNamed(context, HomeScreen.id);
           },
           icon: Icon(
             Icons.arrow_back,
