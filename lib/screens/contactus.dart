@@ -1,6 +1,7 @@
 import 'package:book_recommend/feedback/store1.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/feedback/contact.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/providers/notification_provider.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
@@ -25,121 +26,119 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
     feedbackProvider = Provider.of<FeedbackProvider>(context);
     print(name);
-    return WillPopScope(
-      onWillPop: () {
-        return Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (ctx) => HomeScreen()));
-      },
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, HomeScreen.id);
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: kBackground2,
-              size: 35,
-            ),
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, HomeScreen.id);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: kBackground2,
+            size: 35,
           ),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          elevation: 0.0,
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Stack(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 27),
-                    height: size.height * 0.8,
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: size.height * 0.06,
+        elevation: 0.0,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Stack(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.defaultSize * 2.5,
+                  ),
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: size.height * 0.06,
+                      ),
+                      Text(
+                        "Send Us Your Message",
+                        style: TextStyle(
+                          color: kBackground2,
+                          fontSize: SizeConfig.defaultSize * 2.5,
                         ),
-                        Text(
-                          "Send Us Your Message",
-                          style: TextStyle(
+                      ),
+                      SizedBox(
+                        height: SizeConfig.defaultSize * 3,
+                      ),
+                      TextFormField(
+                        onSaved: (value) {
+                          name = value;
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Name Is Empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: 'Name',
+                          prefixIcon: Icon(
+                            Icons.title,
                             color: kBackground2,
-                            fontSize: 28,
                           ),
                         ),
-                        SizedBox(
-                          height: size.height * 0.07,
-                        ),
-                        TextFormField(
-                          onSaved: (value) {
-                            name = value;
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Name Is Empty';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: 'Name',
-                            prefixIcon: Icon(
-                              Icons.title,
-                              color: kBackground2,
-                            ),
+                      ),
+                      SizedBox(
+                        height: SizeConfig.defaultSize * 2,
+                      ),
+                      TextFormField(
+                        onSaved: (value) {
+                          email = value;
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Email Is Empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: 'Email',
+                          prefixIcon: Icon(
+                            Icons.email,
+                            color: kBackground2,
                           ),
                         ),
-                        SizedBox(
-                          height: size.height * 0.04,
-                        ),
-                        TextFormField(
-                          onSaved: (value) {
-                            email = value;
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Email Is Empty';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: 'Email',
-                            prefixIcon: Icon(
-                              Icons.email,
-                              color: kBackground2,
-                            ),
+                      ),
+                      SizedBox(
+                        height: SizeConfig.defaultSize * 2,
+                      ),
+                      TextFormField(
+                        onSaved: (value) {
+                          message = value;
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Message Is Empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: 'Message',
+                          prefixIcon: Icon(
+                            Icons.message,
+                            color: kBackground2,
                           ),
                         ),
-                        SizedBox(
-                          height: size.height * 0.04,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: SizeConfig.defaultSize * 3,
+                          bottom: SizeConfig.defaultSize * 2,
                         ),
-                        TextFormField(
-                          onSaved: (value) {
-                            message = value;
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Message Is Empty';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: 'Message',
-                            prefixIcon: Icon(
-                              Icons.message,
-                              color: kBackground2,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: size.height * 0.1,
-                        ),
-                        MyButton(
+                        child: MyButton(
                           name: "Send",
                           onPressed: () async {
                             if (!_formKey.currentState.validate()) {
@@ -155,20 +154,22 @@ class _ContactUsState extends State<ContactUs> {
                                   .then((value) {
                                 _scaffoldKey.currentState.showSnackBar(
                                   SnackBar(
-                                    content: Text("Message Send successfully"),
+                                    content:
+                                        Text("Message Send successfully"),
                                   ),
                                 );
                               });
-                              feedbackProvider.addNotification("Notification");
+                              feedbackProvider
+                                  .addNotification("Notification");
                               feedbackProvider.addCount();
                             }
                           },
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

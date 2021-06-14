@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,8 @@ class AboutScreen extends StatefulWidget {
 class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
+    //Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -23,28 +24,31 @@ class _AboutScreenState extends State<AboutScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: kBackground2,
-            size: 35,
+            size: SizeConfig.defaultSize * 3,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+              padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.defaultSize * 1,
+                vertical: SizeConfig.defaultSize * 1,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.defaultSize * 1,
+                    ),
                     child: Text(
                       "About",
                       style: TextStyle(
-                        fontSize: 35,
+                        fontSize: SizeConfig.defaultSize * 3,
                         color: kBackground2,
                       ),
                     ),
@@ -52,114 +56,108 @@ class _AboutScreenState extends State<AboutScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/icons/backlogo.png',
-                      width: 250,
+                      'assets/images/iconbook.png',
+                      width: SizeConfig.defaultSize * 18,
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: SizeConfig.defaultSize * 1.5,
                   ),
                   Text(
                     'Who we are ?',
                     style: TextStyle(
-                      fontSize: 25.0,
-                      color: Theme.of(context).backgroundColor,
+                      fontSize: SizeConfig.defaultSize * 1.9,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.01,
+                    height: SizeConfig.defaultSize * 0.5,
                   ),
                   Text(
                     'Recme is book recommendation app',
                     style: TextStyle(
-                      fontSize: 20.0,
-                      color: Theme.of(context).backgroundColor,
+                      fontSize: SizeConfig.defaultSize * 1.7,
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.01,
+                    height: SizeConfig.defaultSize * 0.6,
                   ),
                   Text(
                     'Since 2021 we make people happy with our services ,This app you can get on all recommendation book that you want to be recommended for you.',
                     style: TextStyle(
-                      fontSize: 16.0,
-                      color: Theme.of(context).backgroundColor,
+                      fontSize: SizeConfig.defaultSize * 1.4,
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.03,
+                    height: SizeConfig.defaultSize * 2,
                   ),
                   Row(
                     children: [
                       CircleAvatar(
                         backgroundColor: kBackground2,
-                        maxRadius: 25,
+                        maxRadius: SizeConfig.defaultSize * 2,
                         child: Icon(
                           Icons.email_outlined,
                           color: Colors.white,
                         ),
                       ),
                       SizedBox(
-                        width: size.width * 0.02,
+                        width: SizeConfig.defaultSize * 0.8,
                       ),
                       Text(
                         'developers_team@gmail.com',
                         style: TextStyle(
-                          fontSize: 15,
-                          color: Theme.of(context).backgroundColor,
+                          fontSize: SizeConfig.defaultSize * 1.3,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: size.height * 0.02,
+                    height: SizeConfig.defaultSize * 0.8,
                   ),
                   Row(
                     children: [
                       CircleAvatar(
                         backgroundColor: kBackground2,
-                        maxRadius: 25,
+                        maxRadius: SizeConfig.defaultSize * 2,
                         child: Icon(
                           Icons.home_outlined,
                           color: Colors.white,
                         ),
                       ),
                       SizedBox(
-                        width: size.width * 0.02,
+                        width: SizeConfig.defaultSize * 0.8,
                       ),
                       Text(
                         'internet street FCAIH helwan university',
                         style: TextStyle(
-                          fontSize: 15.0,
-                          color: Theme.of(context).backgroundColor,
+                          fontSize: SizeConfig.defaultSize * 1.3,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: size.height * 0.02,
+                    height: SizeConfig.defaultSize * 0.8,
                   ),
                   Row(
                     children: [
                       CircleAvatar(
                         backgroundColor: kBackground2,
-                        maxRadius: 25,
+                        maxRadius: SizeConfig.defaultSize * 2,
                         child: Icon(
                           Icons.phone_outlined,
                           color: Colors.white,
                         ),
                       ),
                       SizedBox(
-                        width: size.width * 0.02,
+                        width: SizeConfig.defaultSize * 0.8,
                       ),
                       Text(
                         '+2001123456789',
                         style: TextStyle(
-                          fontSize: 15.0,
-                          color: Theme.of(context).backgroundColor,
+                          fontSize: SizeConfig.defaultSize * 1.3,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

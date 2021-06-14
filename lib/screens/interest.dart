@@ -1,9 +1,11 @@
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:provider/provider.dart';
 
 class InterestBook extends StatefulWidget {
   static String id = 'InterestBook';
@@ -37,9 +39,11 @@ class _InterestBookState extends State<InterestBook> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor:
+            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         title: Text(
           'Interest',
           style: TextStyle(
@@ -59,7 +63,6 @@ class _InterestBookState extends State<InterestBook> {
             size: 35,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
@@ -75,7 +78,6 @@ class _InterestBookState extends State<InterestBook> {
                       width: 1.5,
                       color: kBackground1,
                     ),
-                    color: Theme.of(context).scaffoldBackgroundColor,
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: TextField(

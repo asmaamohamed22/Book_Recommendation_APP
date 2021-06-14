@@ -1,8 +1,8 @@
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:book_recommend/adminPages/addBook.dart';
-import 'package:book_recommend/adminPages/adminMode.dart';
 import 'package:book_recommend/adminPages/viewBook.dart';
 import 'package:book_recommend/adminPages/viewFeedback.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,14 +49,6 @@ class _GridDashboardState extends State<GridDashboard> {
     );
 
     Items item5 = new Items(
-      title: "Settings",
-      subtitle: "🔆",
-      onPressed: () {
-        Navigator.pushReplacementNamed(context, AdminMode.id);
-      },
-    );
-
-    Items item6 = new Items(
       title: "Logout",
       subtitle: "✖️",
       onPressed: () async {
@@ -66,14 +58,21 @@ class _GridDashboardState extends State<GridDashboard> {
       },
     );
 
-    List<Items> myList = [item1, item2, item3, item4, item5, item6];
+    List<Items> myList = [
+      item1,
+      item2,
+      item3,
+      item4,
+      item5,
+    ];
+    SizeConfig().init(context);
     return Flexible(
       child: GridView.count(
-          childAspectRatio: 1.0,
+          childAspectRatio: 1.2,
           padding: EdgeInsets.only(left: 16, right: 16),
           crossAxisCount: 2,
-          crossAxisSpacing: 18,
-          mainAxisSpacing: 18,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
           children: myList.map((data) {
             return GestureDetector(
               onTap: data.onPressed,

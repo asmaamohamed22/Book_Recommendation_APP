@@ -18,7 +18,7 @@ class _AddBookState extends State<AddBook> {
       _title,
       _description,
       _author,
-      _category,
+      _authorImage,
       // ignore: non_constant_identifier_names
       _year_of_publication,
       _image,
@@ -31,7 +31,7 @@ class _AddBookState extends State<AddBook> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -51,7 +51,7 @@ class _AddBookState extends State<AddBook> {
             fontSize: 25,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.white,
         elevation: 0.0,
       ),
       body: Form(
@@ -74,8 +74,7 @@ class _AddBookState extends State<AddBook> {
                           maxRadius: 75,
                           backgroundColor: kBackground2,
                           child: CircleAvatar(
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                            backgroundColor: Colors.white,
                             maxRadius: 70,
                             backgroundImage: AssetImage("assets/skip/home.png"),
                           ),
@@ -196,6 +195,28 @@ class _AddBookState extends State<AddBook> {
                       ),
                       TextFormField(
                         onSaved: (value) {
+                          _authorImage = value;
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'AuthorImage Is Empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: 'Author Image',
+                          prefixIcon: Icon(
+                            Icons.image_outlined,
+                            color: kBackground2,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      TextFormField(
+                        onSaved: (value) {
                           _year_of_publication = value;
                         },
                         validator: (value) {
@@ -258,28 +279,6 @@ class _AddBookState extends State<AddBook> {
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      TextFormField(
-                        onSaved: (value) {
-                          _category = value;
-                        },
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Category Is Empty';
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: kTextFieldDecoration.copyWith(
-                          hintText: 'Category',
-                          prefixIcon: Icon(
-                            Icons.category,
-                            color: kBackground2,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
                         height: size.height * 0.03,
                       ),
                       MyButton(
@@ -299,7 +298,7 @@ class _AddBookState extends State<AddBook> {
                               byear_of_publication: _year_of_publication,
                               bPublisher: _publisher,
                               bLanguage: _language,
-                              bCategory: _category,
+                              bAuthorImage: _authorImage,
                             ))
                                 .then((value) {
                               _scaffoldKey.currentState.showSnackBar(

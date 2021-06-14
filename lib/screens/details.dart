@@ -2,9 +2,11 @@ import 'package:book_recommend/adminPages/models/book.dart';
 import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Details extends StatefulWidget {
   static String id = 'Details';
@@ -56,8 +58,8 @@ class _DetailsState extends State<Details> {
     GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     Size size = MediaQuery.of(context).size;
     Book book = ModalRoute.of(context).settings.arguments;
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       key: _scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -83,8 +85,9 @@ class _DetailsState extends State<Details> {
                       children: [
                         CircleAvatar(
                           maxRadius: 25,
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
+                          backgroundColor: themeProvider.isLightTheme
+                              ? Colors.white
+                              : Color(0xFF26242e),
                           child: IconButton(
                             icon: Icon(
                               Icons.arrow_back,
@@ -101,13 +104,14 @@ class _DetailsState extends State<Details> {
                           children: [
                             CircleAvatar(
                               radius: 25,
-                              backgroundColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              backgroundColor: themeProvider.isLightTheme
+                                  ? Colors.white
+                                  : Color(0xFF26242e),
                               child: IconButton(
                                 icon: Icon(
-                                  Icons.save,
+                                  Icons.save_outlined,
                                   size: 30,
-                                  color: kBackground2,
+                                  color: Colors.grey,
                                 ),
                                 onPressed: () {
                                   int bookIndex = allBooksToSave.indexWhere(
@@ -116,8 +120,7 @@ class _DetailsState extends State<Details> {
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
-                                        content: Text(
-                                            "This Book is in the Save list"),
+                                        content: Text("This Book aleady saved"),
                                       ),
                                     );
                                   } else {
@@ -129,7 +132,7 @@ class _DetailsState extends State<Details> {
                                       bookDescription: book.bDescription,
                                       bookAuthor: book.bAuthor,
                                       bookPublisher: book.bPublisher,
-                                      bookCategory: book.bCategory,
+                                      bookAuthorImage: book.bAuthorImage,
                                       bookLanguage: book.bLanguage,
                                       bookYearOfPublication:
                                           book.byear_of_publication,
@@ -151,12 +154,13 @@ class _DetailsState extends State<Details> {
                             ),
                             CircleAvatar(
                               radius: 25,
-                              backgroundColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              backgroundColor: themeProvider.isLightTheme
+                                  ? Colors.white
+                                  : Color(0xFF26242e),
                               child: IconButton(
                                 icon: Icon(
                                   Icons.favorite_outline,
-                                  color: kBackground2,
+                                  color: Colors.redAccent,
                                   size: 30,
                                 ),
                                 onPressed: () {
@@ -167,7 +171,7 @@ class _DetailsState extends State<Details> {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                            "This Book is in the favorite list"),
+                                            "Book already exist in favorite list"),
                                       ),
                                     );
                                   } else {
@@ -179,7 +183,7 @@ class _DetailsState extends State<Details> {
                                       bookDescription: book.bDescription,
                                       bookAuthor: book.bAuthor,
                                       bookPublisher: book.bPublisher,
-                                      bookCategory: book.bCategory,
+                                      bookAuthorImage: book.bAuthorImage,
                                       bookLanguage: book.bLanguage,
                                       bookYearOfPublication:
                                           book.byear_of_publication,
@@ -207,7 +211,9 @@ class _DetailsState extends State<Details> {
                 margin: EdgeInsets.only(top: size.height * 0.45),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
+                  color: themeProvider.isLightTheme
+                      ? Colors.white
+                      : Color(0xFF26242e),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
@@ -239,7 +245,7 @@ class _DetailsState extends State<Details> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage(book.bImage),
+                                image: NetworkImage(book.bAuthorImage),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -255,7 +261,6 @@ class _DetailsState extends State<Details> {
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).backgroundColor,
                                 ),
                               ),
                               Text(
@@ -289,7 +294,6 @@ class _DetailsState extends State<Details> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
                             ),
                           ),
                           SizedBox(
@@ -299,7 +303,6 @@ class _DetailsState extends State<Details> {
                             book.bIsbn,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
                             ),
                           )
                         ],
@@ -314,7 +317,6 @@ class _DetailsState extends State<Details> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
                             ),
                           ),
                           SizedBox(
@@ -324,7 +326,6 @@ class _DetailsState extends State<Details> {
                             book.byear_of_publication,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
                             ),
                           )
                         ],
@@ -339,7 +340,6 @@ class _DetailsState extends State<Details> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
                             ),
                           ),
                           SizedBox(
@@ -349,7 +349,6 @@ class _DetailsState extends State<Details> {
                             book.bPublisher,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
                             ),
                           )
                         ],
@@ -364,7 +363,6 @@ class _DetailsState extends State<Details> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
                             ),
                           ),
                           SizedBox(
@@ -374,32 +372,6 @@ class _DetailsState extends State<Details> {
                             book.bLanguage,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Category :',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            book.bCategory,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
                             ),
                           )
                         ],

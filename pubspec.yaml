@@ -50,7 +50,11 @@ dependencies:
   hive: ^1.4.1+1
   #used to store local state
   path_provider: ^1.6.5
+  flutter_launcher_name: ^0.0.1
   
+flutter_launcher_name:
+  name: "Recme"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

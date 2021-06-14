@@ -42,6 +42,7 @@ class _SplashState extends State<Splash> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         alignment: Alignment.center,
         child: Stack(
@@ -50,7 +51,7 @@ class _SplashState extends State<Splash> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/icons/backlogo.png',
+                  'assets/images/iconbook.png',
                   height: size.width * 0.3,
                 ),
                 Shimmer.fromColors(

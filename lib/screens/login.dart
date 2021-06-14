@@ -1,5 +1,6 @@
 import 'package:book_recommend/adminPages/Dashboard.dart';
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/screens/register.dart';
 import 'package:book_recommend/screens/reset.dart';
@@ -54,7 +55,6 @@ class _LoginScreenState extends State<LoginScreen> {
             SnackBar(
               content: Text(message.toString()),
               duration: Duration(milliseconds: 800),
-              backgroundColor: Theme.of(context).primaryColor,
             ),
           );
           setState(() {
@@ -83,7 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text(error.toString()),
         duration: Duration(milliseconds: 800),
-        backgroundColor: Theme.of(context).primaryColor,
       ));
     }
     setState(() {
@@ -129,16 +128,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30.0,
-              vertical: 30.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.defaultSize * 2.5,
+              vertical: SizeConfig.defaultSize * 1.8,
             ),
             child: Form(
               key: _formKey,
@@ -146,26 +145,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.center,
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: size.height * 0.03,
-                    ),
                     Image.asset(
-                      'assets/icons/backlogo.png',
-                      height: size.width * 0.43,
+                      'assets/images/iconbook.png',
+                      height: SizeConfig.defaultSize * 13,
                     ),
                     SizedBox(
-                      height: size.height * 0.01,
+                      height: SizeConfig.defaultSize * 1,
                     ),
                     Text(
                       'SignIn',
                       style: TextStyle(
                         fontFamily: 'pacifico',
-                        fontSize: 30.0,
-                        color: Theme.of(context).backgroundColor,
+                        fontSize: SizeConfig.defaultSize * 2.5,
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.03,
+                      height: SizeConfig.defaultSize * 1.8,
                     ),
                     Column(
                       children: [
@@ -181,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * 0.01,
+                          height: SizeConfig.defaultSize * 1,
                         ),
                         TextFormField(
                           controller: password,
@@ -209,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * 0.01,
+                          height: SizeConfig.defaultSize * 1,
                         ),
                         TextButton(
                           onPressed: () {
@@ -219,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             'Forget Password ?',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
+                              fontSize: SizeConfig.defaultSize * 1.7,
                               color: kBackground2,
                             ),
                           ),
@@ -227,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: size.height * 0.01,
+                      height: SizeConfig.defaultSize * 0.7,
                     ),
                     isLoading == false
                         ? MyButton(
@@ -240,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: CircularProgressIndicator(),
                           ),
                     SizedBox(
-                      height: size.height * 0.02,
+                      height: SizeConfig.defaultSize * 0.9,
                     ),
                     HaveAcountOrNot(
                       title: 'Don\'t have an account ? ',

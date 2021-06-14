@@ -72,11 +72,14 @@ class MessageBubble extends StatelessWidget {
             bottom: -5,
             left: !isMe ? MediaQuery.of(context).viewPadding.left : null,
             right: isMe ? MediaQuery.of(context).viewPadding.left : null,
-            child: CircleAvatar(
-              radius: 15,
-              backgroundImage: userImage == ""
-                  ? AssetImage('assets/images/userImage.png')
-                  : NetworkImage(userImage),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: CircleAvatar(
+                radius: 13,
+                backgroundImage: userImage == ""
+                    ? AssetImage('assets/images/userImage.png')
+                    : NetworkImage(userImage),
+              ),
             ),
           ),
         ],

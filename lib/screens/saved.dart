@@ -1,9 +1,11 @@
 import 'package:book_recommend/adminPages/models/book.dart';
 import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/details.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +33,13 @@ class _SaveState extends State<Save> {
     getCallAllFunction();
     // Size size = MediaQuery.of(context).size;
     //Book book = ModalRoute.of(context).settings.arguments;
+    SizeConfig().init(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor:
+            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         title: Text(
           'Save',
           style: TextStyle(
@@ -43,7 +48,7 @@ class _SaveState extends State<Save> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, HomeScreen.id);
+            Navigator.pushReplacementNamed(context, HomeScreen.id);
           },
           icon: Icon(
             Icons.arrow_back,
@@ -51,7 +56,6 @@ class _SaveState extends State<Save> {
             size: 35,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -71,101 +75,118 @@ class _SaveState extends State<Save> {
                     bDescription: data[kBookDescription],
                     bPublisher: data[kBookPublisher],
                     bAuthor: data[kBookAuthor],
-                    bCategory: data[kBookCategory],
+                    bAuthorImage: data[kBookAuthorImage],
                     bIsbn: data[kBookIsbn],
                     byear_of_publication: data[kBookYearOfPublication],
                     bLanguage: data[kBookLanguage],
                   ));
                 }
               }
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  childAspectRatio: 1.5,
-                ),
+              return ListView.builder(
                 itemBuilder: (context, index) => Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.defaultSize * 1.5,
+                      vertical: SizeConfig.defaultSize * 0.6),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(context, Details.id,
                           arguments: books[index]);
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: books[index].bImage == null
-                                ? Container()
-                                : Image(
-                                    fit: BoxFit.fill,
-                                    image: NetworkImage(books[index].bImage),
-                                  ),
+                    child: Container(
+                      height: SizeConfig.defaultSize * 10,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: themeProvider.isLightTheme
+                            ? Colors.white
+                            : Color(0xFF26242e),
+                        borderRadius: BorderRadius.circular(35),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 5),
+                            blurRadius: 10,
                           ),
-                          Positioned(
-                            bottom: 0,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 60,
-                              color: Colors.black87,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 4),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                        ],
+                      ),
+                      child: Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                height: SizeConfig.defaultSize * 9,
+                                width: SizeConfig.defaultSize * 8,
+                                margin: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  image: books[index].bImage == null
+                                      ? Container()
+                                      : DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image:
+                                              NetworkImage(books[index].bImage),
+                                        ),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      bottomLeft: Radius.circular(30)),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: SizeConfig.defaultSize * 1,
+                                  top: SizeConfig.defaultSize * 2,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          books[index].bTitle,
-                                          style: TextStyle(
-                                            color: kBackground2,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                        SizedBox(height: 3),
-                                        Text(
-                                          books[index].bAuthor,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      books[index].bTitle,
+                                      style: TextStyle(
+                                        color: kBackground2,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: SizeConfig.defaultSize * 1.5,
+                                      ),
                                     ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 30),
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
-                                          size: 30,
-                                        ),
-                                        onPressed: () {
-                                          _store
-                                              .deleteSavedBook(books[index].bId)
-                                              .then((value) {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(
-                                                    "Saved Book deleted successfully"),
-                                              ),
-                                            );
-                                          });
-                                        },
+                                    SizedBox(
+                                      height: SizeConfig.defaultSize * 0.7,
+                                    ),
+                                    Text(
+                                      books[index].bAuthor,
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.defaultSize * 1.4,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: SizeConfig.defaultSize * 2,
+                                ),
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.save,
+                                    size: SizeConfig.defaultSize * 3.5,
+                                  ),
+                                  onPressed: () {
+                                    _store
+                                        .deleteSavedBook(books[index].bId)
+                                        .then((value) {
+                                      _scaffoldKey.currentState.showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                              "Saved Book deleted successfully"),
+                                        ),
+                                      );
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

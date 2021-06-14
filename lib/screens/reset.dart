@@ -17,7 +17,6 @@ class _ResetPasswordState extends State<ResetPassword> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(
           'Reset Password',
@@ -37,7 +36,6 @@ class _ResetPasswordState extends State<ResetPassword> {
             size: 35,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
       body: Padding(

@@ -2,6 +2,7 @@ import 'package:book_recommend/adminPages/models/book.dart';
 import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/models/usermodel.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/Recommendation.dart';
 import 'package:book_recommend/screens/Search.dart';
@@ -14,7 +15,8 @@ import 'package:book_recommend/screens/interest.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/saved.dart';
-import 'package:book_recommend/setting/setting.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
+import 'package:book_recommend/setting/Style/pages/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,16 +32,17 @@ BookProvider bookProvider;
 
 class _HomeScreenState extends State<HomeScreen> {
   Widget _builgDrawer() {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       child: Drawer(
         child: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
           child: ListView(
             children: [
               _buildUserAccountsDrawerHeader(),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, HomeScreen.id);
+                  Navigator.pushReplacementNamed(context, HomeScreen.id);
                 },
                 leading: Icon(
                   Icons.home_outlined,
@@ -48,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Home',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -64,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Profile',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -80,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Room',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -96,7 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Recommend',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -112,7 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Interests',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -128,7 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Favorite',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -144,14 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Saved',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ContactUs.id);
+                  Navigator.pushReplacementNamed(context, ContactUs.id);
                 },
                 leading: Icon(
                   Icons.mail_outline,
@@ -160,14 +156,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Contact Us',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, AboutScreen.id);
+                  Navigator.pushReplacementNamed(context, AboutScreen.id);
                 },
                 leading: Icon(
                   Icons.info_outlined,
@@ -176,14 +171,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'About',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, Setting.id);
+                  Navigator.pushReplacementNamed(context, HomePage.id);
                 },
                 leading: Icon(
                   Icons.settings_outlined,
@@ -192,7 +186,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Settings',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -200,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ListTile(
                 onTap: () async {
                   await FirebaseAuth.instance.signOut().then((value) {
-                    Navigator.pushNamed(context, LoginScreen.id);
+                    Navigator.pushReplacementNamed(context, LoginScreen.id);
                   });
                 },
                 leading: Icon(
@@ -210,7 +203,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text(
                   'Logout',
                   style: TextStyle(
-                    color: Theme.of(context).backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -230,24 +222,19 @@ class _HomeScreenState extends State<HomeScreen> {
           accountName: Text(
             e.userName,
             style: TextStyle(
-              color: Theme.of(context).backgroundColor,
-              fontSize: 20.0,
-            ),
+                fontSize: 25.0, color: Colors.white, fontFamily: 'pacifico'),
           ),
           currentAccountPicture: CircleAvatar(
             backgroundImage: e.userImage == null
                 ? AssetImage('assets/images/userImage.png')
                 : NetworkImage(e.userImage),
-            radius: 50.0,
           ),
-          decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-          ),
+          decoration: BoxDecoration(color: kBackground2),
           accountEmail: Text(
             e.userEmail,
             style: TextStyle(
-              color: Theme.of(context).backgroundColor,
               fontSize: 15.0,
+              color: Colors.white,
             ),
           ),
         );
@@ -264,11 +251,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     bookProvider = Provider.of<BookProvider>(context);
     getCallAllFunction();
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
     final _store = Store();
-
+    SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomPadding: false,
       key: _scaffoldKey,
       drawer: _builgDrawer(),
@@ -278,89 +264,76 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               children: [
                 Container(
-                  height: size.height * 0.28,
-                  child: Stack(
+                  height: SizeConfig.defaultSize * 15,
+                  decoration: BoxDecoration(
+                    color: kBackground2,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30.0),
+                      bottomLeft: Radius.circular(30.0),
+                    ),
+                  ),
+                  child: Column(
                     children: [
                       Container(
-                        height: size.height * 0.3 - 27,
-                        decoration: BoxDecoration(
-                          color: kBackground2,
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(30.0),
-                            bottomLeft: Radius.circular(30.0),
-                          ),
+                        padding: EdgeInsets.only(
+                          top: SizeConfig.defaultSize * 1.2,
+                          left: SizeConfig.defaultSize * 1.2,
+                          right: SizeConfig.defaultSize * 1.2,
                         ),
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                vertical: 20.0,
-                                horizontal: 20.0,
+                            IconButton(
+                              icon: Icon(
+                                Icons.sort,
+                                color: Colors.white,
+                                size: SizeConfig.defaultSize * 3.3,
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.sort,
-                                      color: Colors.white,
-                                      size: 35,
-                                    ),
-                                    onPressed: () {
-                                      _scaffoldKey.currentState.openDrawer();
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.search_outlined,
-                                      color: Colors.white,
-                                      size: 35,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pushReplacementNamed(
-                                          context, SearchScreen.id);
-                                    },
-                                  ),
-                                ],
+                              onPressed: () {
+                                _scaffoldKey.currentState.openDrawer();
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.search_outlined,
+                                color: Colors.white,
+                                size: SizeConfig.defaultSize * 3.3,
+                              ),
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, SearchScreen.id);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: SizeConfig.defaultSize * 3,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              radius: 40,
+                              backgroundColor: Colors.white,
+                              backgroundImage: AssetImage(
+                                'assets/icons/bookicon.png',
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 35,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 45,
-                                        backgroundColor: Colors.white,
-                                        backgroundImage: AssetImage(
-                                          'assets/skip/home.png',
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          'What do you want\n to read ?',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 21,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                            SizedBox(
+                              width: SizeConfig.defaultSize * 1.5,
+                            ),
+                            Container(
+                              child: Text(
+                                'Find the best book\nfor you !',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: SizeConfig.defaultSize * 1.9,
+                                  color: Colors.white,
                                 ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
@@ -373,17 +346,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.only(left: 10, top: 10),
                         child: Text(
-                          "New",
+                          "Discover new book",
                           style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor),
+                            fontSize: SizeConfig.defaultSize * 1.5,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: SizeConfig.defaultSize * 0.5,
                       ),
                       Expanded(
                         child: StreamBuilder<QuerySnapshot>(
@@ -400,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     bDescription: data[kBookDescription],
                                     bPublisher: data[kBookPublisher],
                                     bAuthor: data[kBookAuthor],
-                                    bCategory: data[kBookCategory],
+                                    bAuthorImage: data[kBookAuthorImage],
                                     bIsbn: data[kBookIsbn],
                                     byear_of_publication:
                                         data[kBookYearOfPublication],
@@ -408,17 +381,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ));
                                 }
                                 return GridView.builder(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                  ),
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
-                                    childAspectRatio: 0.8,
+                                    childAspectRatio: 0.9,
                                   ),
                                   itemBuilder: (context, index) => Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 5),
+                                        horizontal: 5, vertical: 5),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Navigator.pushNamed(context, Details.id,
+                                        Navigator.pushReplacementNamed(
+                                            context, Details.id,
                                             arguments: books[index]);
                                       },
                                       child: ClipRRect(
@@ -445,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 color: Colors.black87,
                                                 child: Padding(
                                                   padding: EdgeInsets.symmetric(
-                                                      horizontal: 10,
+                                                      horizontal: 6,
                                                       vertical: 4),
                                                   child: Column(
                                                     crossAxisAlignment:
@@ -458,7 +435,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           color: kBackground2,
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          fontSize: 15,
+                                                          fontSize: 14,
                                                         ),
                                                       ),
                                                       SizedBox(height: 3),

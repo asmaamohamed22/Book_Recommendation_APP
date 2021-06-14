@@ -27,7 +27,7 @@ class _BookDetailsState extends State<BookDetails> {
     Size size = MediaQuery.of(context).size;
     Book book = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       key: _scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -35,7 +35,7 @@ class _BookDetailsState extends State<BookDetails> {
             children: [
               Container(
                 width: double.infinity,
-                height: size.height * 0.5,
+                height: size.height * 0.6,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(book.bImage),
@@ -53,8 +53,7 @@ class _BookDetailsState extends State<BookDetails> {
                       children: [
                         CircleAvatar(
                           maxRadius: 25,
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
+                          backgroundColor: Colors.white,
                           child: IconButton(
                             icon: Icon(
                               Icons.arrow_back,
@@ -71,8 +70,7 @@ class _BookDetailsState extends State<BookDetails> {
                           children: [
                             CircleAvatar(
                               radius: 25,
-                              backgroundColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              backgroundColor: Colors.white,
                               child: IconButton(
                                 icon: Icon(
                                   Icons.edit,
@@ -90,8 +88,7 @@ class _BookDetailsState extends State<BookDetails> {
                             ),
                             CircleAvatar(
                               radius: 25,
-                              backgroundColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              backgroundColor: Colors.white,
                               child: IconButton(
                                 icon: Icon(
                                   Icons.delete,
@@ -120,10 +117,10 @@ class _BookDetailsState extends State<BookDetails> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: size.height * 0.45),
+                margin: EdgeInsets.only(top: size.height * 0.5),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
+                  color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
@@ -155,7 +152,7 @@ class _BookDetailsState extends State<BookDetails> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage(book.bImage),
+                                image: NetworkImage(book.bAuthorImage),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -169,24 +166,35 @@ class _BookDetailsState extends State<BookDetails> {
                               Text(
                                 book.bTitle,
                                 style: TextStyle(
-                                  fontSize: 17,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).backgroundColor,
+                                  color: Colors.black,
                                 ),
                               ),
-                              Text(
-                                book.bAuthor,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'by ',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Text(
+                                    book.bAuthor,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 7,
                       ),
                       Text(
                         book.bDescription,
@@ -205,7 +213,7 @@ class _BookDetailsState extends State<BookDetails> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
+                              color: Colors.black,
                             ),
                           ),
                           SizedBox(
@@ -215,7 +223,7 @@ class _BookDetailsState extends State<BookDetails> {
                             book.bIsbn,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
+                              color: Colors.black,
                             ),
                           )
                         ],
@@ -230,7 +238,7 @@ class _BookDetailsState extends State<BookDetails> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
+                              color: Colors.black,
                             ),
                           ),
                           SizedBox(
@@ -240,7 +248,7 @@ class _BookDetailsState extends State<BookDetails> {
                             book.byear_of_publication,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
+                              color: Colors.black,
                             ),
                           )
                         ],
@@ -255,7 +263,7 @@ class _BookDetailsState extends State<BookDetails> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
+                              color: Colors.black,
                             ),
                           ),
                           SizedBox(
@@ -265,7 +273,7 @@ class _BookDetailsState extends State<BookDetails> {
                             book.bPublisher,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
+                              color: Colors.black,
                             ),
                           )
                         ],
@@ -280,7 +288,7 @@ class _BookDetailsState extends State<BookDetails> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
+                              color: Colors.black,
                             ),
                           ),
                           SizedBox(
@@ -290,32 +298,7 @@ class _BookDetailsState extends State<BookDetails> {
                             book.bLanguage,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Category :',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).backgroundColor,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            book.bCategory,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).backgroundColor,
+                              color: Colors.black,
                             ),
                           )
                         ],

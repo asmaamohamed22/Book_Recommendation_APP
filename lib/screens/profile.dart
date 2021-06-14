@@ -2,6 +2,8 @@ import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/models/usermodel.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
+import 'package:book_recommend/widgets/edit_password.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
 import 'package:book_recommend/widgets/mytext.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String id = 'ProfileScreen';
@@ -130,16 +133,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  Widget _buildSingleContainer(
-      {Color color, String startText, String endText}) {
+  Widget _buildSingleContainer({String startText, String endText}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Card(
       shape: RoundedRectangleBorder(side: BorderSide(color: kBackground1)),
       elevation: 2,
       child: ClipPath(
         child: Container(
-          height: 60,
           decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color:
+                  themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
               border: Border(
                 right: BorderSide(color: kBackground2, width: 5),
               )),
@@ -147,9 +150,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 55,
             padding: EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-              color: edit == true
-                  ? color
-                  : Theme.of(context).scaffoldBackgroundColor,
               borderRadius: edit == false
                   ? BorderRadius.circular(30)
                   : BorderRadius.circular(0),
@@ -161,14 +161,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Text(
                   startText,
                   style: TextStyle(
-                      fontSize: 17, color: Theme.of(context).hintColor),
+                    fontSize: 17,
+                  ),
                 ),
                 Text(
                   endText,
                   style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).hintColor),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
@@ -188,6 +189,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     userEmail = TextEditingController(text: userModel.userEmail);
     phoneNumber = TextEditingController(text: userModel.userPhoneNumber);
     userPassword = TextEditingController(text: userModel.userPassword);
+
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -203,10 +205,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildSingleContainer(
             endText: userModel.userPhoneNumber,
             startText: "Phone Number",
-          ),
-          _buildSingleContainer(
-            endText: userModel.userPassword,
-            startText: "Password",
           ),
         ],
       ),
@@ -307,7 +305,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(
                 height: 6.0,
               ),
-              MyText(
+              EditPassword(
                 name: "UserPassword",
                 controller: userPassword,
               ),
@@ -321,10 +319,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     getUserUid();
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor:
+            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         elevation: 0.0,
         centerTitle: true,
         title: edit == false
@@ -363,15 +364,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 onPressed: () {
                   setState(() {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (ctx) => HomeScreen(),
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(context, HomeScreen.id);
                   });
                 },
               ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: [
           edit == false
               ? Container()
@@ -421,16 +417,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Stack(
                               children: [
                                 Container(
-                                  height: 200,
                                   width: double.infinity,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       CircleAvatar(
-                                        maxRadius: 90,
+                                        maxRadius: 70,
                                         backgroundColor: kBackground2,
                                         child: CircleAvatar(
-                                            maxRadius: 83,
+                                            maxRadius: 65,
                                             backgroundImage: _pickedImage ==
                                                     null
                                                 ? userModel.userImage == null
@@ -449,11 +444,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             left: MediaQuery.of(context)
                                                     .viewPadding
                                                     .left +
-                                                230,
+                                                200,
                                             top: MediaQuery.of(context)
                                                     .viewPadding
                                                     .left +
-                                                130),
+                                                80),
                                         child: Card(
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -478,7 +473,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             ),
                             Container(
-                              height: 350,
+                              height: 300,
                               width: double.infinity,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -518,8 +513,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             )
           : Center(
-              child: CircularProgressIndicator(
-                  backgroundColor: Theme.of(context).iconTheme.color),
+              child: CircularProgressIndicator(),
             ),
     );
   }

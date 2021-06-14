@@ -6,7 +6,7 @@ class Book {
   String bTitle;
   String bDescription;
   String bAuthor;
-  String bCategory;
+  String bAuthorImage;
   String bImage;
   String bLanguage;
   String bPublisher;
@@ -20,7 +20,7 @@ class Book {
     @required this.bTitle,
     @required this.bDescription,
     @required this.bAuthor,
-    @required this.bCategory,
+    @required this.bAuthorImage,
     @required this.bImage,
     @required this.bLanguage,
     @required this.bPublisher,

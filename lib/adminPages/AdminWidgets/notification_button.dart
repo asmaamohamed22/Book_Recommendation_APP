@@ -67,7 +67,7 @@ class _NotificationsState extends State<Notifications> {
       child: IconButton(
         icon: Icon(
           Icons.notifications_none,
-          color: Theme.of(context).backgroundColor,
+          color: Colors.black,
           size: 35,
         ),
         onPressed: () {

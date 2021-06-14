@@ -55,13 +55,12 @@ class _NewMessageState extends State<NewMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding: EdgeInsets.symmetric(horizontal: 5),
       child: SingleChildScrollView(
         child: WillPopScope(
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   children: [
                     Expanded(
@@ -75,7 +74,6 @@ class _NewMessageState extends State<NewMessage> {
                               width: 1,
                               color: Colors.grey[500],
                             ),
-                            color: Theme.of(context).scaffoldBackgroundColor,
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Column(

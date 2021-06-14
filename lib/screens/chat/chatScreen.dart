@@ -2,7 +2,9 @@ import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/chat/message.dart';
 import 'package:book_recommend/screens/chat/new_message.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
   static String id = 'ChatScreen';
@@ -14,9 +16,11 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor:
+            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         title: Text(
           'Room',
           style: TextStyle(
@@ -37,7 +41,6 @@ class _ChatScreenState extends State<ChatScreen> {
             size: 35,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
       body: Stack(
@@ -47,7 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Opacity(
               opacity: 0.2,
               child: Image.asset(
-                'assets/icons/backlogo.png',
+                'assets/images/iconbook.png',
                 height: size.width * 0.6,
               ),
             ),

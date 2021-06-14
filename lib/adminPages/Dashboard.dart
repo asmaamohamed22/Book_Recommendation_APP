@@ -14,7 +14,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           SizedBox(
@@ -31,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
                     Text(
                       'Dashboard',
                       style: TextStyle(
-                          color: Theme.of(context).backgroundColor,
+                          color: Colors.black,
                           fontSize: 27,
                           fontFamily: 'pacifico'),
                     ),

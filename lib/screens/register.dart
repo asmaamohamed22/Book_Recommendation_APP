@@ -1,4 +1,5 @@
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/widgets/haveaccountornot.dart';
@@ -45,7 +46,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text(message.toString()),
         duration: Duration(milliseconds: 600),
-        backgroundColor: Theme.of(context).primaryColor,
       ));
       setState(() {
         isLoading = false;
@@ -57,7 +57,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text(error.toString()),
         duration: Duration(milliseconds: 600),
-        backgroundColor: Theme.of(context).primaryColor,
       ));
 
       print(error);
@@ -129,16 +128,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30.0,
-              vertical: 30.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.defaultSize * 2.5,
+              vertical: SizeConfig.defaultSize * 1.8,
             ),
             child: Form(
               key: _formKey,
@@ -146,26 +145,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 alignment: Alignment.center,
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: size.height * 0.03,
-                    ),
                     Image.asset(
-                      'assets/icons/backlogo.png',
-                      height: size.width * 0.43,
+                      'assets/images/iconbook.png',
+                      height: SizeConfig.defaultSize * 13,
                     ),
                     SizedBox(
-                      height: size.height * 0.01,
+                      height: SizeConfig.defaultSize * 1,
                     ),
                     Text(
                       'SignUp',
                       style: TextStyle(
                         fontFamily: 'pacifico',
-                        fontSize: 30.0,
-                        color: Theme.of(context).backgroundColor,
+                        fontSize: SizeConfig.defaultSize * 2.5,
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.03,
+                      height: SizeConfig.defaultSize * 1.8,
                     ),
                     Column(
                       children: [
@@ -180,7 +175,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * 0.01,
+                          height: SizeConfig.defaultSize * 1,
                         ),
                         TextFormField(
                           controller: email,
@@ -194,7 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * 0.01,
+                          height: SizeConfig.defaultSize * 1,
                         ),
                         TextFormField(
                           controller: phoneNumber,
@@ -207,7 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * 0.01,
+                          height: SizeConfig.defaultSize * 1,
                         ),
                         TextFormField(
                           controller: password,
@@ -237,7 +232,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: size.height * 0.04,
+                      height: SizeConfig.defaultSize * 2,
                     ),
                     isLoading == false
                         ? MyButton(
@@ -250,7 +245,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: CircularProgressIndicator(),
                           ),
                     SizedBox(
-                      height: size.height * 0.02,
+                      height: SizeConfig.defaultSize * 0.9,
                     ),
                     HaveAcountOrNot(
                       title: 'I have an account ! ',

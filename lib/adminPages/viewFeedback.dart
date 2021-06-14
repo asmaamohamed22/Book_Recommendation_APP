@@ -22,7 +22,7 @@ class _ViewFeedbackState extends State<ViewFeedback> {
     // Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -42,7 +42,7 @@ class _ViewFeedbackState extends State<ViewFeedback> {
             fontSize: 25,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.white,
         elevation: 0.0,
       ),
       body: StreamBuilder<QuerySnapshot>(

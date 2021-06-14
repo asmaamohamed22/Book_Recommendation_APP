@@ -20,7 +20,7 @@ class _ViewBookState extends State<ViewBook> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -40,7 +40,7 @@ class _ViewBookState extends State<ViewBook> {
             fontSize: 25,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.white,
         elevation: 0.0,
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -57,7 +57,7 @@ class _ViewBookState extends State<ViewBook> {
                   bDescription: data[kBookDescription],
                   bPublisher: data[kBookPublisher],
                   bAuthor: data[kBookAuthor],
-                  bCategory: data[kBookCategory],
+                  bAuthorImage: data[kBookAuthorImage],
                   bIsbn: data[kBookIsbn],
                   byear_of_publication: data[kBookYearOfPublication],
                   bLanguage: data[kBookLanguage],
@@ -94,7 +94,7 @@ class _ViewBookState extends State<ViewBook> {
                               color: Colors.black87,
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 4),
+                                    horizontal: 6, vertical: 4),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -103,7 +103,7 @@ class _ViewBookState extends State<ViewBook> {
                                       style: TextStyle(
                                         color: kBackground2,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 15,
+                                        fontSize: 14,
                                       ),
                                     ),
                                     SizedBox(height: 3),

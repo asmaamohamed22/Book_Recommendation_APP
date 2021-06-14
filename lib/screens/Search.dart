@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   static String id = 'SearchScreen';
@@ -37,9 +39,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor:
+            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         title: Text(
           'Search',
           style: TextStyle(
@@ -56,7 +60,6 @@ class _SearchScreenState extends State<SearchScreen> {
             size: 35,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
@@ -72,7 +75,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       width: 1.5,
                       color: kBackground1,
                     ),
-                    color: Theme.of(context).scaffoldBackgroundColor,
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: TextField(

@@ -1,6 +1,9 @@
+import 'dart:ui';
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:book_recommend/adminPages/models/book.dart';
@@ -28,12 +31,15 @@ class _FavoriteState extends State<Favorite> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     bookProvider = Provider.of<BookProvider>(context);
     getCallAllFunction();
+    SizeConfig().init(context);
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor:
+            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         title: Text(
           'Favorite',
           style: TextStyle(
@@ -50,7 +56,6 @@ class _FavoriteState extends State<Favorite> {
             size: 35,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -70,7 +75,7 @@ class _FavoriteState extends State<Favorite> {
                   bDescription: data[kBookDescription],
                   bPublisher: data[kBookPublisher],
                   bAuthor: data[kBookAuthor],
-                  bCategory: data[kBookCategory],
+                  bAuthorImage: data[kBookAuthorImage],
                   bIsbn: data[kBookIsbn],
                   byear_of_publication: data[kBookYearOfPublication],
                   bLanguage: data[kBookLanguage],
@@ -78,95 +83,112 @@ class _FavoriteState extends State<Favorite> {
               }
             }
 
-            return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                childAspectRatio: 1.5,
-              ),
+            return ListView.builder(
               itemBuilder: (context, index) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.defaultSize * 1.5,
+                    vertical: SizeConfig.defaultSize * 0.6),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, Details.id,
+                    Navigator.pushReplacementNamed(context, Details.id,
                         arguments: books[index]);
                   },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    child: Stack(
-                      children: [
-                        Positioned.fill(
-                          child: books[index].bImage == null
-                              ? Container()
-                              : Image(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(books[index].bImage),
-                                ),
+                  child: Container(
+                    height: SizeConfig.defaultSize * 10,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: themeProvider.isLightTheme
+                          ? Colors.white
+                          : Color(0xFF26242e),
+                      borderRadius: BorderRadius.circular(35),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0, 5),
+                          blurRadius: 10,
                         ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 60,
-                            color: Colors.black87,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 4),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                      ],
+                    ),
+                    child: Stack(
+                      alignment: Alignment.centerLeft,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              height: SizeConfig.defaultSize * 9,
+                              width: SizeConfig.defaultSize * 8,
+                              margin: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                image: books[index].bImage == null
+                                    ? Container()
+                                    : DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image:
+                                            NetworkImage(books[index].bImage),
+                                      ),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    bottomLeft: Radius.circular(30)),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: SizeConfig.defaultSize * 1,
+                                top: SizeConfig.defaultSize * 2,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        books[index].bTitle,
-                                        style: TextStyle(
-                                          color: kBackground2,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      SizedBox(height: 3),
-                                      Text(
-                                        books[index].bAuthor,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    books[index].bTitle,
+                                    style: TextStyle(
+                                      color: kBackground2,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: SizeConfig.defaultSize * 1.5,
+                                    ),
                                   ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 40),
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.favorite_rounded,
-                                        color: Colors.red,
-                                        size: 35,
-                                      ),
-                                      onPressed: () {
-                                        _store
-                                            .deleteFavoriteBook(
-                                                books[index].bId)
-                                            .then((value) {
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                  "Your Favorite Book deleted successfully"),
-                                            ),
-                                          );
-                                        });
-                                      },
+                                  SizedBox(
+                                    height: SizeConfig.defaultSize * 0.7,
+                                  ),
+                                  Text(
+                                    books[index].bAuthor,
+                                    style: TextStyle(
+                                      fontSize: SizeConfig.defaultSize * 1.4,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.defaultSize * 2,
+                              ),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.favorite_rounded,
+                                  color: Colors.redAccent,
+                                  size: SizeConfig.defaultSize * 3.5,
+                                ),
+                                onPressed: () {
+                                  _store
+                                      .deleteFavoriteBook(books[index].bId)
+                                      .then((value) {
+                                    _scaffoldKey.currentState.showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            "Your Favorite Book deleted successfully"),
+                                      ),
+                                    );
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

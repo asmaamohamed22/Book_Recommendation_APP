@@ -16,7 +16,6 @@ class HaveAcountOrNot extends StatelessWidget {
           title,
           style: TextStyle(
             fontSize: 15.0,
-            color: Theme.of(context).backgroundColor,
           ),
         ),
         GestureDetector(

@@ -1,4 +1,5 @@
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/onBoarding/fade_animation.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/widgets/roundedbutton.dart';
@@ -14,12 +15,13 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
+    // Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
-          height: size.height,
+          height: SizeConfig.defaultSize * 55,
           width: double.infinity,
           child: Stack(
             children: [
@@ -34,18 +36,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           0.4,
                           Image.asset(
                             'assets/skip/Welcome-bro.png',
-                            height: size.width * 0.8,
+                            height: SizeConfig.defaultSize * 23,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize),
                           child: FadeAnimation(
                             0.7,
                             Text(
-                              'Get the best recommendation for book!',
+                              'Get the best \n recommendation \n for book !',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 32.0,
+                                fontSize: SizeConfig.defaultSize * 2.8,
                                 fontWeight: FontWeight.bold,
                                 color: kBackground2,
                               ),
@@ -56,20 +59,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.06,
+                    height: SizeConfig.defaultSize * 3,
                   ),
                   FadeAnimation(
                     1,
                     Text(
                       'Start Your Journey',
                       style: TextStyle(
-                          fontSize: 18,
-                          color: kLightGreyColor,
+                          fontSize: SizeConfig.defaultSize * 1.5,
                           fontWeight: FontWeight.w500),
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.03,
+                    height: SizeConfig.defaultSize * 1.2,
                   ),
                   FadeAnimation(
                     1.2,
@@ -83,7 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.01,
+                    height: SizeConfig.defaultSize * 0.6,
                   ),
                   FadeAnimation(
                     1.5,

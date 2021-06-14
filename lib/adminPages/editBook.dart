@@ -18,7 +18,7 @@ class _EditBookState extends State<EditBook> {
       _title,
       _description,
       _author,
-      _category,
+      _authorImage,
       // ignore: non_constant_identifier_names
       _year_of_publication,
       _image,
@@ -34,7 +34,7 @@ class _EditBookState extends State<EditBook> {
     Book book = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -54,7 +54,7 @@ class _EditBookState extends State<EditBook> {
             fontSize: 25,
           ),
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.white,
         elevation: 0.0,
       ),
       body: Form(
@@ -204,6 +204,29 @@ class _EditBookState extends State<EditBook> {
                       ),
                       TextFormField(
                         onSaved: (value) {
+                          _authorImage = value;
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Author Image Is Empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        initialValue: book.bAuthorImage ?? "",
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: 'Author Image',
+                          prefixIcon: Icon(
+                            Icons.image_outlined,
+                            color: kBackground2,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      TextFormField(
+                        onSaved: (value) {
                           _year_of_publication = value;
                         },
                         validator: (value) {
@@ -269,29 +292,6 @@ class _EditBookState extends State<EditBook> {
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      TextFormField(
-                        onSaved: (value) {
-                          _category = value;
-                        },
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Category Is Empty';
-                          } else {
-                            return null;
-                          }
-                        },
-                        initialValue: book.bCategory ?? "",
-                        decoration: kTextFieldDecoration.copyWith(
-                          hintText: 'Category',
-                          prefixIcon: Icon(
-                            Icons.category,
-                            color: kBackground2,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
                         height: size.height * 0.03,
                       ),
                       MyButton(
@@ -313,7 +313,7 @@ class _EditBookState extends State<EditBook> {
                                           _year_of_publication,
                                       kBookPublisher: _publisher,
                                       kBookLanguage: _language,
-                                      kBookCategory: _category,
+                                      kBookAuthorImage: _authorImage,
                                     }),
                                     book.bId)
                                 .then((value) {
