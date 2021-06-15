@@ -200,6 +200,7 @@ class _BookDetailsState extends State<BookDetails> {
                         book.bDescription,
                         style: TextStyle(
                           fontSize: 16,
+                          color: Colors.black,
                         ),
                         textAlign: TextAlign.justify,
                       ),

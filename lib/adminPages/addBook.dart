@@ -76,7 +76,8 @@ class _AddBookState extends State<AddBook> {
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
                             maxRadius: 70,
-                            backgroundImage: AssetImage("assets/skip/home.png"),
+                            backgroundImage:
+                                AssetImage('assets/icons/bookicon.png'),
                           ),
                         ),
                       ),
@@ -95,7 +96,8 @@ class _AddBookState extends State<AddBook> {
                           }
                         },
                         decoration: kTextFieldDecoration.copyWith(
-                          hintText: 'Image',
+                          hintText: 'Book Image',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.image,
                             color: kBackground2,
@@ -118,6 +120,7 @@ class _AddBookState extends State<AddBook> {
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'ISBN',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.confirmation_number,
                             color: kBackground2,
@@ -140,6 +143,7 @@ class _AddBookState extends State<AddBook> {
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Title',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.title,
                             color: kBackground2,
@@ -162,6 +166,7 @@ class _AddBookState extends State<AddBook> {
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Description',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.description,
                             color: kBackground2,
@@ -184,6 +189,7 @@ class _AddBookState extends State<AddBook> {
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Author',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.person,
                             color: kBackground2,
@@ -206,6 +212,7 @@ class _AddBookState extends State<AddBook> {
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Author Image',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.image_outlined,
                             color: kBackground2,
@@ -228,6 +235,7 @@ class _AddBookState extends State<AddBook> {
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Year of Publication',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.public,
                             color: kBackground2,
@@ -250,6 +258,7 @@ class _AddBookState extends State<AddBook> {
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Publisher',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.publish,
                             color: kBackground2,
@@ -272,6 +281,7 @@ class _AddBookState extends State<AddBook> {
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Language',
+                          hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.language,
                             color: kBackground2,

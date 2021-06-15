@@ -77,10 +77,11 @@ class _EditBookState extends State<EditBook> {
                           maxRadius: 75,
                           backgroundColor: kBackground2,
                           child: CircleAvatar(
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                            backgroundColor: Colors.white,
                             maxRadius: 70,
-                            backgroundImage: AssetImage("assets/skip/home.png"),
+                            backgroundImage: AssetImage(
+                              'assets/icons/bookicon.png',
+                            ),
                           ),
                         ),
                       ),
@@ -99,8 +100,10 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.bImage ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Image',
+                          // hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.image,
                             color: kBackground2,
@@ -122,8 +125,10 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.bIsbn ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'ISBN',
+                          // hintStyle: TextStyle(color: Colors.black45),
                           prefixIcon: Icon(
                             Icons.confirmation_number,
                             color: kBackground2,
@@ -145,6 +150,7 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.bTitle ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Title',
                           prefixIcon: Icon(
@@ -168,6 +174,7 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.bDescription ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Description',
                           prefixIcon: Icon(
@@ -191,6 +198,7 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.bAuthor ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Author',
                           prefixIcon: Icon(
@@ -214,6 +222,7 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.bAuthorImage ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Author Image',
                           prefixIcon: Icon(
@@ -237,6 +246,7 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.byear_of_publication ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Year of Publication',
                           prefixIcon: Icon(
@@ -260,6 +270,7 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.bPublisher ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Publisher',
                           prefixIcon: Icon(
@@ -283,6 +294,7 @@ class _EditBookState extends State<EditBook> {
                           }
                         },
                         initialValue: book.bLanguage ?? "",
+                        style: TextStyle(color: Colors.black45),
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Language',
                           prefixIcon: Icon(
@@ -319,6 +331,7 @@ class _EditBookState extends State<EditBook> {
                                 .then((value) {
                               _scaffoldKey.currentState.showSnackBar(
                                 SnackBar(
+                                  backgroundColor: Colors.black45,
                                   content: Text("Book edited successfully"),
                                 ),
                               );
