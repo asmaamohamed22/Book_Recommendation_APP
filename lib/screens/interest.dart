@@ -1,11 +1,9 @@
-import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
-import 'package:provider/provider.dart';
 
 class InterestBook extends StatefulWidget {
   static String id = 'InterestBook';
@@ -22,7 +20,7 @@ class _InterestBookState extends State<InterestBook> {
     //String url = "http://10.0.2.2:5000/api/get_rec?books={1:\"$booknamee\"}";
     http.Response response = await http.get(
       Uri.https(
-        '192.168.1.5:5000',
+        '192.168.1.13:5000',
         "/api/get_rec",
         {'books': "{1:\"$booknamee\"}"},
       ),
@@ -39,11 +37,9 @@ class _InterestBookState extends State<InterestBook> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor:
-            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         title: Text(
           'Interest',
           style: TextStyle(
@@ -63,6 +59,7 @@ class _InterestBookState extends State<InterestBook> {
             size: 35,
           ),
         ),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
@@ -78,6 +75,7 @@ class _InterestBookState extends State<InterestBook> {
                       width: 1.5,
                       color: kBackground1,
                     ),
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: TextField(
@@ -115,20 +113,75 @@ class _InterestBookState extends State<InterestBook> {
                   height: bookcount == null ? 50 : 400,
                   child: bookcount == null
                       ? Text("Loading books...")
-                      : ListView.builder(
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              leading: CircleAvatar(
-                                radius: 50,
-                                backgroundImage: NetworkImage(
-                                    jsonresponse[index]["imageUrlL"]),
+                      : GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.8,
+                          ),
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                                child: Stack(
+                                  children: [
+                                    Positioned.fill(
+                                      child: jsonresponse[index]["imageUrlL"] ==
+                                              null
+                                          ? Container()
+                                          : Image(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(
+                                                  jsonresponse[index]
+                                                      ["imageUrlL"]),
+                                            ),
+                                    ),
+                                    Positioned(
+                                      bottom: 0,
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 60,
+                                        color: Colors.black87,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 4),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                jsonresponse[index]
+                                                    ["bookTitle"],
+                                                style: TextStyle(
+                                                  color: kBackground2,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                              SizedBox(height: 3),
+                                              Text(
+                                                jsonresponse[index]
+                                                    ["bookAuthor"],
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              title: Text(
-                                jsonresponse[index]["bookTitle"],
-                                style: TextStyle(fontSize: 25),
-                              ),
-                            );
-                          },
+                            ),
+                          ),
                           itemCount: bookcount,
                         ),
                 ),

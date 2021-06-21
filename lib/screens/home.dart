@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final _store = Store();
     SizeConfig().init(context);
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      // resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       drawer: _builgDrawer(),
       body: SafeArea(
