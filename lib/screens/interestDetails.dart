@@ -369,7 +369,7 @@ class _InterestDetailsState extends State<InterestDetails> {
                         ],
                       ),
                       SizedBox(
-                        height: SizeConfig.defaultSize * 1.2,
+                        height: SizeConfig.defaultSize * 2,
                       ),
                       MyButton(
                         name: 'Add to Interest',

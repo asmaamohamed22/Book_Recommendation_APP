@@ -72,7 +72,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -115,11 +115,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     });
                   },
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 Container(
-                  height: bookcount == null ? 50 : 400,
+                  height: bookcount == null ? 50 : 600,
                   child: bookcount == null
-                      ? Text("Loading books...")
+                      ? Container()
                       : GridView.builder(
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
@@ -128,7 +128,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
+                                horizontal: 5, vertical: 5),
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -170,7 +170,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 style: TextStyle(
                                                   color: kBackground2,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
+                                                  fontSize: 13,
                                                 ),
                                               ),
                                               SizedBox(height: 3),
@@ -178,7 +178,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 booklist[index].bookAuthor,
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 14,
+                                                  fontSize: 13,
                                                 ),
                                               ),
                                             ],

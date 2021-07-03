@@ -369,13 +369,11 @@ class _RecommendationDetailsState extends State<RecommendationDetails> {
                         ],
                       ),
                       SizedBox(
-                        height: SizeConfig.defaultSize * 1.2,
+                        height: SizeConfig.defaultSize * 3,
                       ),
                       MyButton(
                         name: 'Add to Interest',
-                        onPressed: () {
-                          Navigator.pushNamed(context, InterestsBooksInHome.id);
-                        },
+                        onPressed: () {},
                       ),
                     ],
                   ),
