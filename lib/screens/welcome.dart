@@ -21,7 +21,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
-          height: SizeConfig.defaultSize * 60,
+          height: SizeConfig.defaultSize * 56,
           width: double.infinity,
           child: Stack(
             children: [
@@ -36,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           0.4,
                           Image.asset(
                             'assets/skip/Welcome-bro.png',
-                            height: SizeConfig.defaultSize * 22,
+                            height: SizeConfig.defaultSize * 21,
                           ),
                         ),
                         Padding(
@@ -48,7 +48,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               'Get the best \n recommendation \n for book !',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: SizeConfig.defaultSize * 2.8,
+                                fontSize: SizeConfig.defaultSize * 2.6,
                                 fontWeight: FontWeight.bold,
                                 color: kBackground2,
                               ),
@@ -59,7 +59,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: SizeConfig.defaultSize * 3,
+                    height: SizeConfig.defaultSize * 2,
                   ),
                   FadeAnimation(
                     1,
@@ -85,7 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: SizeConfig.defaultSize * 0.6,
+                    height: SizeConfig.defaultSize * 0.5,
                   ),
                   FadeAnimation(
                     1.5,

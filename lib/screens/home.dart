@@ -12,6 +12,7 @@ import 'package:book_recommend/screens/contactus.dart';
 import 'package:book_recommend/screens/details.dart';
 import 'package:book_recommend/screens/favorite.dart';
 import 'package:book_recommend/screens/interest.dart';
+import 'package:book_recommend/screens/interestsBooksInHome.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/saved.dart';
@@ -264,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               children: [
                 Container(
-                  height: SizeConfig.defaultSize * 14,
+                  height: SizeConfig.defaultSize * 15,
                   decoration: BoxDecoration(
                     color: kBackground2,
                     borderRadius: BorderRadius.only(
@@ -350,6 +351,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, top: 10),
+                        child: Text(
+                          "Interest Books",
+                          style: TextStyle(
+                            fontSize: SizeConfig.defaultSize * 1.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      InterestsBooksInHome(),
                       Padding(
                         padding: const EdgeInsets.only(left: 10, top: 10),
                         child: Text(

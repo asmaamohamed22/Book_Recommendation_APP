@@ -18,6 +18,7 @@ import 'package:book_recommend/screens/details.dart';
 import 'package:book_recommend/screens/favorite.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/screens/interest.dart';
+import 'package:book_recommend/screens/interestsBooksInHome.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/register.dart';
@@ -33,7 +34,6 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
-
 
 void main() async {
   HttpOverrides.global = new MyHttpOverrides();
@@ -139,7 +139,7 @@ class _MyBookState extends State<MyBook> {
               SearchScreen.id: (context) => SearchScreen(),
               InterestBook.id: (context) => InterestBook(),
               HomePage.id: (context) => HomePage(),
-
+              InterestsBooksInHome.id: (context) => InterestsBooksInHome(),
             },
           );
         });

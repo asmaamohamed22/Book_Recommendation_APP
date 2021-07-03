@@ -30,7 +30,7 @@ class _RecommendationState extends State<Recommendation> {
     print(decString);
     http.Response response = await http.get(
       Uri.https(
-        '192.168.1.13:5000',
+        '192.168.1.4:5000',
         "/api/get_rec",
         {'books': "{$decString}"},
       ),

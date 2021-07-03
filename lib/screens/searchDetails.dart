@@ -1,6 +1,9 @@
 import 'package:book_recommend/models/bookmodel.dart';
 import 'package:book_recommend/constant.dart';
+import 'package:book_recommend/onBoarding/config/size_config.dart';
+import 'package:book_recommend/screens/interestsBooksInHome.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
+import 'package:book_recommend/widgets/mybutton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +59,7 @@ class _SearchDetailsState extends State<SearchDetails> {
   final _store = Store();
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     Size size = MediaQuery.of(context).size;
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -111,7 +115,7 @@ class _SearchDetailsState extends State<SearchDetails> {
                                 icon: Icon(
                                   Icons.save_outlined,
                                   size: 30,
-                                  color: Colors.grey,
+                                  color: Colors.grey[800],
                                 ),
                                 onPressed: () {
                                   int bookIndex = allBooksToSave.indexWhere(
@@ -364,6 +368,15 @@ class _SearchDetailsState extends State<SearchDetails> {
                           )
                         ],
                       ),
+                      SizedBox(
+                        height: SizeConfig.defaultSize * 1.2,
+                      ),
+                      MyButton(
+                        name: 'Add to Interest',
+                        onPressed: () {
+                          Navigator.pushNamed(context, InterestsBooksInHome.id);
+                        },
+                      )
                     ],
                   ),
                 ),
