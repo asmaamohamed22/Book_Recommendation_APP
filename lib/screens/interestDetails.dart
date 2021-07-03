@@ -1,21 +1,23 @@
-import 'package:book_recommend/adminPages/models/book.dart';
-import 'package:book_recommend/adminPages/services/store.dart';
+import 'package:book_recommend/models/bookmodel.dart';
 import 'package:book_recommend/constant.dart';
-import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:book_recommend/screens/interest.dart';
+import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:book_recommend/adminPages/services/apiStore.dart';
 
-class Details extends StatefulWidget {
-  static String id = 'Details';
+class InterestDetails extends StatefulWidget {
+  static String id = 'Detailspage';
+  final Book book;
+  InterestDetails(this.book);
   @override
-  _DetailsState createState() => _DetailsState();
+  _InterestDetailsState createState() => _InterestDetailsState();
 }
 
-class _DetailsState extends State<Details> {
-  @override
+class _InterestDetailsState extends State<InterestDetails> {
   void initState() {
     super.initState();
     getAllFave();
@@ -51,13 +53,11 @@ class _DetailsState extends State<Details> {
     });
   }
 
-  Book book;
   final _store = Store();
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     Size size = MediaQuery.of(context).size;
-    Book book = ModalRoute.of(context).settings.arguments;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       key: _scaffoldKey,
@@ -70,7 +70,7 @@ class _DetailsState extends State<Details> {
                 height: size.height * 0.5,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(book.bImage),
+                    image: NetworkImage(widget.book.imageUrlL),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -96,7 +96,7 @@ class _DetailsState extends State<Details> {
                             ),
                             onPressed: () {
                               Navigator.pushReplacementNamed(
-                                  context, HomeScreen.id);
+                                  context, InterestBook.id);
                             },
                           ),
                         ),
@@ -111,12 +111,13 @@ class _DetailsState extends State<Details> {
                                 icon: Icon(
                                   Icons.save_outlined,
                                   size: 30,
-                                  color: Colors.grey[800],
+                                  color: Colors.grey,
                                 ),
                                 onPressed: () {
                                   int bookIndex = allBooksToSave.indexWhere(
                                       (element) =>
-                                          element["bookTitle"] == book.bTitle);
+                                          element["bookTitle"] ==
+                                          widget.book.bookTitle);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
@@ -126,16 +127,14 @@ class _DetailsState extends State<Details> {
                                   } else {
                                     _store
                                         .addBookToSaveList(
-                                      bookIsbn: book.bIsbn,
-                                      bookTitle: book.bTitle,
-                                      bookImage: book.bImage,
-                                      bookDescription: book.bDescription,
-                                      bookAuthor: book.bAuthor,
-                                      bookPublisher: book.bPublisher,
-                                      bookAuthorImage: book.bAuthorImage,
-                                      bookLanguage: book.bLanguage,
-                                      bookYearOfPublication:
-                                          book.byear_of_publication,
+                                      bookIsbn: widget.book.isbn.toString(),
+                                      bookTitle: widget.book.bookTitle,
+                                      bookImage: widget.book.imageUrlL,
+                                      bookAuthor: widget.book.bookAuthor,
+                                      bookPublisher: widget.book.publisher,
+                                      bookYearOfPublication: widget
+                                          .book.yearOfPublication
+                                          .toString(),
                                     )
                                         .then((value) {
                                       _scaffoldKey.currentState.showSnackBar(
@@ -166,7 +165,8 @@ class _DetailsState extends State<Details> {
                                 onPressed: () {
                                   int bookIndex = allBooksToFav.indexWhere(
                                       (element) =>
-                                          element["bookTitle"] == book.bTitle);
+                                          element["bookTitle"] ==
+                                          widget.book.bookTitle);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
@@ -177,16 +177,14 @@ class _DetailsState extends State<Details> {
                                   } else {
                                     _store
                                         .addBookToFavoriteList(
-                                      bookIsbn: book.bIsbn,
-                                      bookTitle: book.bTitle,
-                                      bookImage: book.bImage,
-                                      bookDescription: book.bDescription,
-                                      bookAuthor: book.bAuthor,
-                                      bookPublisher: book.bPublisher,
-                                      bookAuthorImage: book.bAuthorImage,
-                                      bookLanguage: book.bLanguage,
-                                      bookYearOfPublication:
-                                          book.byear_of_publication,
+                                      bookIsbn: widget.book.isbn.toString(),
+                                      bookTitle: widget.book.bookTitle,
+                                      bookImage: widget.book.imageUrlL,
+                                      bookAuthor: widget.book.bookAuthor,
+                                      bookPublisher: widget.book.publisher,
+                                      bookYearOfPublication: widget
+                                          .book.yearOfPublication
+                                          .toString(),
                                     )
                                         .then((value) {
                                       _scaffoldKey.currentState.showSnackBar(
@@ -245,7 +243,7 @@ class _DetailsState extends State<Details> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage(book.bAuthorImage),
+                                image: NetworkImage(widget.book.imageUrlS),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -257,14 +255,14 @@ class _DetailsState extends State<Details> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                book.bTitle,
+                                widget.book.bookTitle,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                book.bAuthor,
+                                widget.book.bookAuthor,
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.grey,
@@ -276,16 +274,6 @@ class _DetailsState extends State<Details> {
                       ),
                       SizedBox(
                         height: 15,
-                      ),
-                      Text(
-                        book.bDescription,
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                       Row(
                         children: [
@@ -300,7 +288,7 @@ class _DetailsState extends State<Details> {
                             width: 10,
                           ),
                           Text(
-                            book.bIsbn,
+                            widget.book.isbn.toString(),
                             style: TextStyle(
                               fontSize: 15,
                             ),
@@ -323,7 +311,7 @@ class _DetailsState extends State<Details> {
                             width: 10,
                           ),
                           Text(
-                            book.byear_of_publication,
+                            widget.book.yearOfPublication.toString(),
                             style: TextStyle(
                               fontSize: 15,
                             ),
@@ -346,7 +334,7 @@ class _DetailsState extends State<Details> {
                             width: 10,
                           ),
                           Text(
-                            book.bPublisher,
+                            widget.book.publisher,
                             style: TextStyle(
                               fontSize: 15,
                             ),
@@ -369,7 +357,7 @@ class _DetailsState extends State<Details> {
                             width: 10,
                           ),
                           Text(
-                            book.bLanguage,
+                            'English',
                             style: TextStyle(
                               fontSize: 15,
                             ),

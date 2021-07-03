@@ -21,7 +21,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
-          height: SizeConfig.defaultSize * 55,
+          height: SizeConfig.defaultSize * 60,
           width: double.infinity,
           child: Stack(
             children: [
@@ -36,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           0.4,
                           Image.asset(
                             'assets/skip/Welcome-bro.png',
-                            height: SizeConfig.defaultSize * 23,
+                            height: SizeConfig.defaultSize * 22,
                           ),
                         ),
                         Padding(

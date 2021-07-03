@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/models/bookmodel.dart';
+import 'package:book_recommend/screens/interestDetails.dart';
 
 class InterestBook extends StatefulWidget {
   static String id = 'InterestBook';
@@ -15,8 +17,9 @@ class _InterestBookState extends State<InterestBook> {
   int bookcount;
   var jsonresponse;
   String bookname;
-  Future<void> getBooks(booknamee) async {
-    //List<Book> books = [];
+  List<Book> booklist = new List();
+  Future<List<Book>> getBooks(booknamee) async {
+    List<Book> books = new List();
     //String url = "http://10.0.2.2:5000/api/get_rec?books={1:\"$booknamee\"}";
     http.Response response = await http.get(
       Uri.https(
@@ -30,9 +33,16 @@ class _InterestBookState extends State<InterestBook> {
         jsonresponse = jsonDecode(response.body);
         bookcount = jsonresponse.length;
       });
+      books = bookFromJson(response.body);
+      setState(() {
+        booklist = books;
+      });
     } else {
       print("Request failed with status: ${response.statusCode}");
     }
+    // print(books);
+
+    return books;
   }
 
   @override
@@ -123,21 +133,25 @@ class _InterestBookState extends State<InterestBook> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    new MaterialPageRoute(
+                                        builder: (context) =>
+                                            InterestDetails(booklist[index])));
+                              },
                               child: ClipRRect(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30)),
                                 child: Stack(
                                   children: [
                                     Positioned.fill(
-                                      child: jsonresponse[index]["imageUrlL"] ==
-                                              null
+                                      child: booklist[index].imageUrlL == null
                                           ? Container()
                                           : Image(
                                               fit: BoxFit.fill,
                                               image: NetworkImage(
-                                                  jsonresponse[index]
-                                                      ["imageUrlL"]),
+                                                  booklist[index].imageUrlL),
                                             ),
                                     ),
                                     Positioned(
@@ -155,8 +169,7 @@ class _InterestBookState extends State<InterestBook> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                jsonresponse[index]
-                                                    ["bookTitle"],
+                                                booklist[index].bookTitle,
                                                 style: TextStyle(
                                                   color: kBackground2,
                                                   fontWeight: FontWeight.bold,
@@ -165,8 +178,7 @@ class _InterestBookState extends State<InterestBook> {
                                               ),
                                               SizedBox(height: 3),
                                               Text(
-                                                jsonresponse[index]
-                                                    ["bookAuthor"],
+                                                booklist[index].bookAuthor,
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 14,
@@ -182,7 +194,7 @@ class _InterestBookState extends State<InterestBook> {
                               ),
                             ),
                           ),
-                          itemCount: bookcount,
+                          itemCount: booklist.length,
                         ),
                 ),
               ],

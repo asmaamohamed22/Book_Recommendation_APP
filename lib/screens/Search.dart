@@ -6,6 +6,8 @@ import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:book_recommend/models/bookmodel.dart';
+import 'package:book_recommend/screens/searchDetails.dart';
 
 class SearchScreen extends StatefulWidget {
   static String id = 'SearchScreen';
@@ -17,8 +19,9 @@ class _SearchScreenState extends State<SearchScreen> {
   int bookcount;
   var jsonresponse;
   String bookname;
+  List<Book> booklist = new List();
   Future<void> getBooks(booknamee) async {
-    //List<Book> books = [];
+    List<Book> books = new List();
     //String url = "http://10.0.2.2:5000/api/get_rec?books={1:\"$booknamee\"}";
     http.Response response = await http.get(
       Uri.https(
@@ -32,9 +35,14 @@ class _SearchScreenState extends State<SearchScreen> {
         jsonresponse = jsonDecode(response.body);
         bookcount = jsonresponse.length;
       });
+      books = bookFromJson(response.body);
+      setState(() {
+        booklist = books;
+      });
     } else {
       print("Request failed with status: ${response.statusCode}");
     }
+    // return books;
   }
 
   @override
@@ -99,7 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 SizedBox(height: 30),
                 MyButton(
-                  name: 'Recommend',
+                  name: 'Search',
                   onPressed: () {
                     getBooks(bookname);
                     setState(() {
@@ -122,21 +130,25 @@ class _SearchScreenState extends State<SearchScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    new MaterialPageRoute(
+                                        builder: (context) =>
+                                            SearchDetails(booklist[index])));
+                              },
                               child: ClipRRect(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30)),
                                 child: Stack(
                                   children: [
                                     Positioned.fill(
-                                      child: jsonresponse[index]["imageUrlL"] ==
-                                              null
+                                      child: booklist[index].imageUrlL == null
                                           ? Container()
                                           : Image(
                                               fit: BoxFit.fill,
                                               image: NetworkImage(
-                                                  jsonresponse[index]
-                                                      ["imageUrlL"]),
+                                                  booklist[index].imageUrlL),
                                             ),
                                     ),
                                     Positioned(
@@ -154,8 +166,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                jsonresponse[index]
-                                                    ["bookTitle"],
+                                                booklist[index].bookTitle,
                                                 style: TextStyle(
                                                   color: kBackground2,
                                                   fontWeight: FontWeight.bold,
@@ -164,8 +175,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                               ),
                                               SizedBox(height: 3),
                                               Text(
-                                                jsonresponse[index]
-                                                    ["bookAuthor"],
+                                                booklist[index].bookAuthor,
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 14,
@@ -181,7 +191,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                             ),
                           ),
-                          itemCount: bookcount,
+                          itemCount: booklist.length,
                         ),
                 ),
               ],

@@ -143,7 +143,7 @@ class _SaveState extends State<Save> {
                                       style: TextStyle(
                                         color: kBackground2,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: SizeConfig.defaultSize * 1.5,
+                                        fontSize: SizeConfig.defaultSize * 1.3,
                                       ),
                                     ),
                                     SizedBox(
@@ -152,7 +152,7 @@ class _SaveState extends State<Save> {
                                     Text(
                                       books[index].bAuthor,
                                       style: TextStyle(
-                                        fontSize: SizeConfig.defaultSize * 1.4,
+                                        fontSize: SizeConfig.defaultSize * 1.2,
                                       ),
                                     ),
                                   ],
@@ -166,11 +166,13 @@ class _SaveState extends State<Save> {
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: SizeConfig.defaultSize * 2,
+                                  vertical: SizeConfig.defaultSize * 4,
                                 ),
                                 child: IconButton(
                                   icon: Icon(
                                     Icons.save,
-                                    size: SizeConfig.defaultSize * 3.5,
+                                    size: SizeConfig.defaultSize * 3.3,
+                                    color: Colors.grey[800],
                                   ),
                                   onPressed: () {
                                     _store
