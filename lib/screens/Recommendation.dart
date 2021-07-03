@@ -7,6 +7,8 @@ import 'dart:convert';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:provider/provider.dart';
+import 'package:book_recommend/models/bookmodel.dart';
+import 'package:book_recommend/screens/recommendationDetails.dart';
 
 class Recommendation extends StatefulWidget {
   static String id = 'Recommendation';
@@ -21,7 +23,9 @@ class _RecommendationState extends State<Recommendation> {
   String bookname;
   String queryDec;
   int count = 0;
+  List<Book> booklist = new List();
   Future<void> callUri(decString) async {
+    List<Book> books = [];
     print("hello fro calURI");
     print(decString);
     http.Response response = await http.get(
@@ -36,9 +40,15 @@ class _RecommendationState extends State<Recommendation> {
         jsonresponse = jsonDecode(response.body);
         bookcount = jsonresponse.length;
       });
+      final books = bookFromJson(response.body);
+      setState(() {
+        booklist = books;
+      });
     } else {
       print("Request failed with status: ${response.statusCode}");
     }
+
+    return books;
   }
 
   void getBooks() async {
@@ -126,21 +136,26 @@ class _RecommendationState extends State<Recommendation> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    new MaterialPageRoute(
+                                        builder: (context) =>
+                                            RecommendationDetails(
+                                                booklist[index])));
+                              },
                               child: ClipRRect(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30)),
                                 child: Stack(
                                   children: [
                                     Positioned.fill(
-                                      child: jsonresponse[index]["imageUrlL"] ==
-                                              null
+                                      child: booklist[index].imageUrlL == null
                                           ? Container()
                                           : Image(
                                               fit: BoxFit.fill,
                                               image: NetworkImage(
-                                                  jsonresponse[index]
-                                                      ["imageUrlL"]),
+                                                  booklist[index].imageUrlL),
                                             ),
                                     ),
                                     Positioned(
@@ -158,8 +173,7 @@ class _RecommendationState extends State<Recommendation> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                jsonresponse[index]
-                                                    ["bookTitle"],
+                                                booklist[index].bookTitle,
                                                 style: TextStyle(
                                                   color: kBackground2,
                                                   fontWeight: FontWeight.bold,
@@ -168,8 +182,7 @@ class _RecommendationState extends State<Recommendation> {
                                               ),
                                               SizedBox(height: 3),
                                               Text(
-                                                jsonresponse[index]
-                                                    ["bookAuthor"],
+                                                booklist[index].bookAuthor,
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 14,
@@ -185,7 +198,7 @@ class _RecommendationState extends State<Recommendation> {
                               ),
                             ),
                           ),
-                          itemCount: bookcount,
+                          itemCount: booklist.length,
                         ),
                 ),
               ],
