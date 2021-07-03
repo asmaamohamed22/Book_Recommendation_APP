@@ -54,111 +54,106 @@ class _NewMessageState extends State<NewMessage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: WillPopScope(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Container(
-                          height: 50,
-                          // padding: EdgeInsets.symmetric(horizontal: 15),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.grey[500],
-                            ),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Column(
+    return SingleChildScrollView(
+      child: WillPopScope(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 50,
+                      // padding: EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.grey[500],
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      show
-                                          ? Icons.keyboard
-                                          : Icons.emoji_emotions_outlined,
-                                      size: 25,
-                                      color: kBackground2,
-                                    ),
-                                    onPressed: () {
-                                      if (!show) {
-                                        focusNode.unfocus();
-                                        focusNode.canRequestFocus = false;
-                                      }
-                                      setState(() {
-                                        show = !show;
-                                      });
-                                    },
-                                  ),
-                                  Expanded(
-                                    child: TextField(
-                                      focusNode: focusNode,
-                                      controller: _controller,
-                                      autocorrect: true,
-                                      enableSuggestions: true,
-                                      decoration: InputDecoration(
-                                        hintText: "Type your message",
-                                        border: InputBorder.none,
-                                        hintStyle: TextStyle(
-                                          color: Colors.grey[500],
-                                        ),
-                                      ),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _enteredMessage = value;
-                                        });
-                                      },
+                              IconButton(
+                                icon: Icon(
+                                  show
+                                      ? Icons.keyboard
+                                      : Icons.emoji_emotions_outlined,
+                                  size: 25,
+                                  color: kBackground2,
+                                ),
+                                onPressed: () {
+                                  if (!show) {
+                                    focusNode.unfocus();
+                                    focusNode.canRequestFocus = false;
+                                  }
+                                  setState(() {
+                                    show = !show;
+                                  });
+                                },
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  focusNode: focusNode,
+                                  controller: _controller,
+                                  autocorrect: true,
+                                  enableSuggestions: true,
+                                  decoration: InputDecoration(
+                                    hintText: "Type your message",
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[500],
                                     ),
                                   ),
-                                ],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _enteredMessage = value;
+                                    });
+                                  },
+                                ),
                               ),
                             ],
                           ),
-                        ),
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundColor: kBackground2,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.send,
-                          color: Colors.white,
-                          size: 23,
-                        ),
-                        onPressed: () => _enteredMessage.trim().isEmpty
-                            ? null
-                            : _sendMessage(),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: kBackground2,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.send,
+                        color: Colors.white,
+                        size: 23,
                       ),
+                      onPressed: () => _enteredMessage.trim().isEmpty
+                          ? null
+                          : _sendMessage(),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              show ? emojiSelect() : Container(),
-            ],
-          ),
-          onWillPop: () {
-            if (show) {
-              setState(() {
-                show = false;
-              });
-            } else {
-              Navigator.pop(context);
-            }
-            return Future.value(false);
-          },
+            ),
+            show ? emojiSelect() : Container(),
+          ],
         ),
+        onWillPop: () {
+          if (show) {
+            setState(() {
+              show = false;
+            });
+          } else {
+            Navigator.pop(context);
+          }
+          return Future.value(false);
+        },
       ),
     );
   }

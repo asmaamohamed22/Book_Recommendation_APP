@@ -51,7 +51,7 @@ class _SplashState extends State<Splash> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/iconbook.png',
+                  'assets/icons/thisicon.png',
                   height: size.width * 0.3,
                 ),
                 Shimmer.fromColors(

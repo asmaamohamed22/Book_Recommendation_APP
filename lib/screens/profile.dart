@@ -70,6 +70,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           content: Text('Please Try Valid Email'),
         ),
       );
+    } else if (userPassword.text.length < 8) {
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text('Password is too short'),
+        ),
+      );
     } else if (phoneNumber.text.length < 11 || phoneNumber.text.length > 11) {
       _scaffoldKey.currentState.showSnackBar(
         SnackBar(

@@ -56,7 +56,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/images/iconbook.png',
+                      'assets/icons/thisicon.png',
                       width: SizeConfig.defaultSize * 18,
                     ),
                   ),

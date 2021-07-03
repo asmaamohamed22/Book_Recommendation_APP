@@ -199,7 +199,7 @@ class _FavoriteState extends State<Favorite> {
             );
           } else {
             return Center(
-              child: Text('Favorite List Is Empty'),
+              child: CircularProgressIndicator(),
             );
           }
         },

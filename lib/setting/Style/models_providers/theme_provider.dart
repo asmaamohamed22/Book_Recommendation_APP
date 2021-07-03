@@ -33,7 +33,7 @@ class ThemeProvider with ChangeNotifier {
   // use to toggle the theme
   toggleThemeData() async {
     final settings = await Hive.openBox('settings');
-    settings.put('isLightTheme', !isLightTheme);
+    settings.put('isLightTheme', isLightTheme);
     isLightTheme = !isLightTheme;
     getCurrentStatusNavigationBarColor();
     notifyListeners();

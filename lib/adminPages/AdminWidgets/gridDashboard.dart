@@ -41,14 +41,6 @@ class _GridDashboardState extends State<GridDashboard> {
     );
 
     Items item4 = new Items(
-      title: "Generate Report",
-      subtitle: "📝",
-      onPressed: () {
-        //Navigator.pushReplacementNamed(context, HomeScreen.id);
-      },
-    );
-
-    Items item5 = new Items(
       title: "Logout",
       subtitle: "✖️",
       onPressed: () async {
@@ -63,16 +55,15 @@ class _GridDashboardState extends State<GridDashboard> {
       item2,
       item3,
       item4,
-      item5,
     ];
     SizeConfig().init(context);
     return Flexible(
       child: GridView.count(
-          childAspectRatio: 1.2,
+          childAspectRatio: 1,
           padding: EdgeInsets.only(left: 16, right: 16),
           crossAxisCount: 2,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
+          crossAxisSpacing: 18,
+          mainAxisSpacing: 18,
           children: myList.map((data) {
             return GestureDetector(
               onTap: data.onPressed,

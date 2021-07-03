@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushReplacementNamed(context, HomeScreen.id);
                 },
                 leading: Icon(
-                  Icons.home_outlined,
+                  Icons.home,
                   color: kBackground2,
                 ),
                 title: Text(
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushReplacementNamed(context, ProfileScreen.id);
                 },
                 leading: Icon(
-                  Icons.person_outlined,
+                  Icons.person,
                   color: kBackground2,
                 ),
                 title: Text(
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushReplacementNamed(context, ChatScreen.id);
                 },
                 leading: Icon(
-                  Icons.group_outlined,
+                  Icons.group,
                   color: kBackground2,
                 ),
                 title: Text(
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushReplacementNamed(context, Recommendation.id);
                 },
                 leading: Icon(
-                  Icons.book_outlined,
+                  Icons.book,
                   color: kBackground2,
                 ),
                 title: Text(
@@ -217,12 +217,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildUserAccountsDrawerHeader() {
     List<UserModel> userModel = bookProvider.userModelList;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: userModel.map((e) {
         return UserAccountsDrawerHeader(
           accountName: Text(
             e.userName,
             style: TextStyle(
-                fontSize: 25.0, color: Colors.white, fontFamily: 'pacifico'),
+                fontSize: 23.0, color: Colors.white, fontFamily: 'pacifico'),
           ),
           currentAccountPicture: CircleAvatar(
             backgroundImage: e.userImage == null
@@ -255,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final _store = Store();
     SizeConfig().init(context);
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
       key: _scaffoldKey,
       drawer: _builgDrawer(),
       body: SafeArea(
@@ -316,10 +318,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             CircleAvatar(
-                              radius: 40,
+                              radius: 41,
                               backgroundColor: Colors.white,
-                              backgroundImage: AssetImage(
-                                'assets/icons/bookicon.png',
+                              child: CircleAvatar(
+                                radius: 35,
+                                backgroundColor: Colors.white,
+                                backgroundImage: AssetImage(
+                                  'assets/icons/thisicon.png',
+                                ),
                               ),
                             ),
                             SizedBox(
