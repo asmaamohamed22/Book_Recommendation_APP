@@ -116,7 +116,7 @@ class _DetailsState extends State<Details> {
                                 onPressed: () {
                                   int bookIndex = allBooksToSave.indexWhere(
                                       (element) =>
-                                          element["bookTitle"] == book.bTitle);
+                                          element["bookIsbn"] == book.bIsbn);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
@@ -166,7 +166,7 @@ class _DetailsState extends State<Details> {
                                 onPressed: () {
                                   int bookIndex = allBooksToFav.indexWhere(
                                       (element) =>
-                                          element["bookTitle"] == book.bTitle);
+                                          element["bookIsbn"] == book.bIsbn);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(

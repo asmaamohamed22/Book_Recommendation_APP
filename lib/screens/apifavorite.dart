@@ -3,13 +3,13 @@ import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/screens/interest.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:book_recommend/adminPages/models/book.dart';
 import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:book_recommend/screens/details.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
@@ -90,7 +90,7 @@ class _FavoriteState extends State<Favorite> {
                     vertical: SizeConfig.defaultSize * 0.6),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, Details.id,
+                    Navigator.pushReplacementNamed(context, InterestBook.id,
                         arguments: books[index]);
                   },
                   child: Container(

@@ -3,8 +3,8 @@ import 'package:book_recommend/adminPages/services/store.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/providers/provider.dart';
-import 'package:book_recommend/screens/details.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/screens/interestDetails.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -89,7 +89,7 @@ class _SaveState extends State<Save> {
                       vertical: SizeConfig.defaultSize * 0.6),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, Details.id,
+                      Navigator.pushNamed(context, InterestDetails.id,
                           arguments: books[index]);
                     },
                     child: Container(

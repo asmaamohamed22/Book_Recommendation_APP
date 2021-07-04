@@ -13,7 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:book_recommend/adminPages/services/apiStore.dart';
 
 class SearchDetails extends StatefulWidget {
-  static String id = 'Detailspage';
+  static String id = 'ApiDetail';
   final Book book;
   SearchDetails(this.book);
   @override
@@ -120,8 +120,8 @@ class _SearchDetailsState extends State<SearchDetails> {
                                 onPressed: () {
                                   int bookIndex = allBooksToSave.indexWhere(
                                       (element) =>
-                                          element["bookTitle"] ==
-                                          widget.book.bookTitle);
+                                          element["bookIsbn"] ==
+                                          widget.book.isbn);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
@@ -169,8 +169,8 @@ class _SearchDetailsState extends State<SearchDetails> {
                                 onPressed: () {
                                   int bookIndex = allBooksToFav.indexWhere(
                                       (element) =>
-                                          element["bookTitle"] ==
-                                          widget.book.bookTitle);
+                                          element["bookIsbn"] ==
+                                          widget.book.isbn);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(

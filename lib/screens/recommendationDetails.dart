@@ -1,7 +1,6 @@
 import 'package:book_recommend/models/bookmodel.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
-import 'package:book_recommend/screens/interestsBooksInHome.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:book_recommend/adminPages/services/apiStore.dart';
 
 class RecommendationDetails extends StatefulWidget {
-  static String id = 'Detailspage';
+  static String id = 'ApiDetail';
   final Book book;
   RecommendationDetails(this.book);
   @override
@@ -120,8 +119,8 @@ class _RecommendationDetailsState extends State<RecommendationDetails> {
                                 onPressed: () {
                                   int bookIndex = allBooksToSave.indexWhere(
                                       (element) =>
-                                          element["bookTitle"] ==
-                                          widget.book.bookTitle);
+                                          element["bookIsbn"] ==
+                                          widget.book.isbn);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(

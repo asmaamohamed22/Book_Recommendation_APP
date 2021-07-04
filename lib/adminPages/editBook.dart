@@ -80,7 +80,7 @@ class _EditBookState extends State<EditBook> {
                             backgroundColor: Colors.white,
                             maxRadius: 70,
                             backgroundImage: AssetImage(
-                              'assets/icons/bookicon.png',
+                              'assets/icons/thisicon.png',
                             ),
                           ),
                         ),

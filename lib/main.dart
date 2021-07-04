@@ -34,6 +34,7 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:book_recommend/screens/interestDetails.dart';
 
 void main() async {
   HttpOverrides.global = new MyHttpOverrides();

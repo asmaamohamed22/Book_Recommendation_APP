@@ -77,7 +77,7 @@ class _AddBookState extends State<AddBook> {
                             backgroundColor: Colors.white,
                             maxRadius: 70,
                             backgroundImage:
-                                AssetImage('assets/icons/bookicon.png'),
+                                AssetImage('assets/icons/thisicon.png'),
                           ),
                         ),
                       ),
