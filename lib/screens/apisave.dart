@@ -1,10 +1,9 @@
 import 'package:book_recommend/adminPages/models/book.dart';
-import 'package:book_recommend/adminPages/services/store.dart';
+import 'package:book_recommend/adminPages/services/apiStore.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/providers/provider.dart';
 import 'package:book_recommend/screens/home.dart';
-import 'package:book_recommend/screens/interestDetails.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,7 +19,7 @@ class Save extends StatefulWidget {
 BookProvider bookProvider;
 
 class _SaveState extends State<Save> {
-  final _store = Store();
+  final _store = ApiStore();
   Book book;
   void getCallAllFunction() {
     bookProvider.getUserData();
@@ -89,8 +88,8 @@ class _SaveState extends State<Save> {
                       vertical: SizeConfig.defaultSize * 0.6),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, InterestDetails.id,
-                          arguments: books[index]);
+                      // Navigator.pushNamed(context, InterestDetails.id,
+                      //  arguments: books[index]);
                     },
                     child: Container(
                       height: SizeConfig.defaultSize * 10,

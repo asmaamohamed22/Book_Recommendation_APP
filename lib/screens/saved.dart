@@ -149,11 +149,23 @@ class _SaveState extends State<Save> {
                                     SizedBox(
                                       height: SizeConfig.defaultSize * 0.7,
                                     ),
-                                    Text(
-                                      books[index].bAuthor,
-                                      style: TextStyle(
-                                        fontSize: SizeConfig.defaultSize * 1.2,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'by ',
+                                          style: TextStyle(
+                                            fontSize:
+                                                SizeConfig.defaultSize * 1.2,
+                                          ),
+                                        ),
+                                        Text(
+                                          books[index].bAuthor,
+                                          style: TextStyle(
+                                            fontSize:
+                                                SizeConfig.defaultSize * 1.2,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),

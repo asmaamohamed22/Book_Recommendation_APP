@@ -6,7 +6,7 @@ import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:book_recommend/models/bookmodel.dart';
+import 'package:book_recommend/models/apibookmodel.dart';
 import 'package:book_recommend/screens/searchDetails.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -19,9 +19,9 @@ class _SearchScreenState extends State<SearchScreen> {
   int bookcount;
   var jsonresponse;
   String bookname;
-  List<Book> booklist = new List();
+  List<Apibook> booklist = new List();
   Future<void> getBooks(booknamee) async {
-    List<Book> books = new List();
+    List<Apibook> books = new List();
     //String url = "http://10.0.2.2:5000/api/get_rec?books={1:\"$booknamee\"}";
     http.Response response = await http.get(
       Uri.https(
@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
         jsonresponse = jsonDecode(response.body);
         bookcount = jsonresponse.length;
       });
-      books = bookFromJson(response.body);
+      books = apibookFromJson(response.body);
       setState(() {
         booklist = books;
       });
@@ -77,32 +77,35 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1.5,
-                      color: kBackground1,
-                    ),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: TextField(
-                    autocorrect: true,
-                    enableSuggestions: true,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: 18.0, horizontal: 20.0),
-                      hintText: "Enter book name",
-                      border: InputBorder.none,
-                      hintStyle: TextStyle(
-                        color: Colors.grey[500],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1.5,
+                        color: kBackground1,
                       ),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    onChanged: (value) {
-                      bookname = value;
-                    },
-                    onSubmitted: (value) {
-                      print(value);
-                    },
+                    child: TextField(
+                      autocorrect: true,
+                      enableSuggestions: true,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 18.0, horizontal: 20.0),
+                        hintText: "Enter book name",
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                      onChanged: (value) {
+                        bookname = value;
+                      },
+                      onSubmitted: (value) {
+                        print(value);
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(height: 30),

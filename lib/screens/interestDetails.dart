@@ -1,7 +1,8 @@
-import 'package:book_recommend/models/bookmodel.dart';
+import 'package:book_recommend/adminPages/models/intersetBook.dart';
+import 'package:book_recommend/interests/userinterest.dart';
+import 'package:book_recommend/models/apibookmodel.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
-import 'package:book_recommend/screens/interestsBooksInHome.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +15,7 @@ import 'package:book_recommend/adminPages/services/apiStore.dart';
 
 class InterestDetails extends StatefulWidget {
   static String id = 'Detailspage';
-  final Book book;
+  final Apibook book;
   InterestDetails(this.book);
   @override
   _InterestDetailsState createState() => _InterestDetailsState();
@@ -25,6 +26,7 @@ class _InterestDetailsState extends State<InterestDetails> {
     super.initState();
     getAllFave();
     getAllSave();
+    getAllInterest();
   }
 
   List<Map<String, dynamic>> allBooksToFav = [];
@@ -56,7 +58,24 @@ class _InterestDetailsState extends State<InterestDetails> {
     });
   }
 
-  final _store = Store();
+  List<Map<String, dynamic>> allBooksToInterest = [];
+
+  void getAllInterest() async {
+    QuerySnapshot snapShot = await _userInterest.getAllInterests();
+
+    List<QueryDocumentSnapshot> allBooksInInterest = snapShot.docs;
+
+    allBooksInInterest.forEach((element) {
+      print("=-=-=-=-=> ${element.data().toString()}");
+      setState(() {
+        allBooksToInterest.add(element.data());
+      });
+    });
+  }
+
+  final _store = ApiStore();
+  final _userInterest = UserInterest();
+  Interest interest;
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -120,12 +139,13 @@ class _InterestDetailsState extends State<InterestDetails> {
                                 onPressed: () {
                                   int bookIndex = allBooksToSave.indexWhere(
                                       (element) =>
-                                          element["bookIsbn"] ==
-                                          widget.book.isbn);
+                                          element["bookTitle"] ==
+                                          widget.book.bookTitle);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
-                                        content: Text("This Book aleady saved"),
+                                        content:
+                                            Text("This Book already saved"),
                                       ),
                                     );
                                   } else {
@@ -169,8 +189,8 @@ class _InterestDetailsState extends State<InterestDetails> {
                                 onPressed: () {
                                   int bookIndex = allBooksToFav.indexWhere(
                                       (element) =>
-                                          element["bookIsbn"] ==
-                                          widget.book.isbn);
+                                          element["bookTitle"] ==
+                                          widget.book.bookTitle);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
@@ -239,36 +259,32 @@ class _InterestDetailsState extends State<InterestDetails> {
                       SizedBox(
                         height: 20,
                       ),
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 50,
-                            height: 65,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: NetworkImage(widget.book.imageUrlS),
-                                fit: BoxFit.fill,
-                              ),
+                          Text(
+                            widget.book.bookTitle,
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(
-                            width: 10,
+                            height: 5,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
                             children: [
                               Text(
-                                widget.book.bookTitle,
+                                'by ',
                                 style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Colors.grey,
                                 ),
                               ),
                               Text(
                                 widget.book.bookAuthor,
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -374,7 +390,28 @@ class _InterestDetailsState extends State<InterestDetails> {
                       MyButton(
                         name: 'Add to Interest',
                         onPressed: () {
-                          Navigator.pushNamed(context, InterestsBooksInHome.id);
+                          int bookIndex = allBooksToInterest.indexWhere(
+                              (element) =>
+                                  element["bookName"] == widget.book.bookTitle);
+                          if (bookIndex != -1) {
+                            _scaffoldKey.currentState.showSnackBar(
+                              SnackBar(
+                                content: Text("This Book already added"),
+                              ),
+                            );
+                          } else {
+                            _userInterest
+                                .addUserInterests(
+                              bookName: widget.book.bookTitle,
+                            )
+                                .then((value) {
+                              _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  content: Text("Book added Successfully"),
+                                ),
+                              );
+                            });
+                          }
                         },
                       )
                     ],

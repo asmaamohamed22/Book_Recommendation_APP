@@ -92,7 +92,7 @@ class _ViewFeedbackState extends State<ViewFeedback> {
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                             ),
                                           ),
                                           SizedBox(
@@ -117,7 +117,7 @@ class _ViewFeedbackState extends State<ViewFeedback> {
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                             ),
                                           ),
                                           SizedBox(
@@ -162,7 +162,7 @@ class _ViewFeedbackState extends State<ViewFeedback> {
                                 contacts[index].fMessage,
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                             ],

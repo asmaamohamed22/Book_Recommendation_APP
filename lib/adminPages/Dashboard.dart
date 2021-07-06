@@ -55,7 +55,7 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
           SizedBox(
-            height: size.height * 0.04,
+            height: size.height * 0.08,
           ),
           GridDashboard(),
         ],

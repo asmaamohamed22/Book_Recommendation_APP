@@ -1,14 +1,14 @@
 import 'dart:async';
-import 'package:book_recommend/models/bookmodel.dart';
+import 'package:book_recommend/models/apibookmodel.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Store {
+class ApiStore {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  addBook(Book book) async {
+  addBook(Apibook book) async {
     await _firestore.collection(kBooksCollection).add({
       kBookIsbn: book.isbn.toString(),
       kBookImage: book.imageUrlL,

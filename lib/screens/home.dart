@@ -16,6 +16,7 @@ import 'package:book_recommend/screens/interestsBooksInHome.dart';
 import 'package:book_recommend/screens/login.dart';
 import 'package:book_recommend/screens/profile.dart';
 import 'package:book_recommend/screens/saved.dart';
+import 'package:book_recommend/screens/seeMore.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:book_recommend/setting/Style/pages/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,6 +31,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 BookProvider bookProvider;
+bool isLoading = false;
 
 class _HomeScreenState extends State<HomeScreen> {
   Widget _builgDrawer() {
@@ -223,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
           accountName: Text(
             e.userName,
             style: TextStyle(
-                fontSize: 25.0, color: Colors.white, fontFamily: 'pacifico'),
+                fontSize: 23.0, color: Colors.white, fontFamily: 'pacifico'),
           ),
           currentAccountPicture: CircleAvatar(
             backgroundImage: e.userImage == null
@@ -352,16 +354,45 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 10),
-                        child: Text(
-                          "Interest Books",
-                          style: TextStyle(
-                            fontSize: SizeConfig.defaultSize * 1.5,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Recommended Books",
+                              style: TextStyle(
+                                fontSize: SizeConfig.defaultSize * 1.5,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    new MaterialPageRoute(
+                                        builder: (context) => SeeMore()));
+                              },
+                              child: Text(
+                                "see more",
+                                style: TextStyle(
+                                  fontSize: SizeConfig.defaultSize * 1.5,
+                                  fontWeight: FontWeight.bold,
+                                  color: kBackground2,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      InterestsBooksInHome(),
+                      isLoading == false
+                          ? InterestsBooksInHome()
+                          : Container(
+                              height: 150,
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10, top: 10),
                         child: Text(
@@ -373,7 +404,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: SizeConfig.defaultSize * 0.5,
+                        height: SizeConfig.defaultSize * 0.3,
                       ),
                       Expanded(
                         child: StreamBuilder<QuerySnapshot>(
@@ -452,16 +483,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           color: kBackground2,
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          fontSize: 14,
+                                                          fontSize: 13,
                                                         ),
                                                       ),
                                                       SizedBox(height: 3),
-                                                      Text(
-                                                        books[index].bAuthor,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                        ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            'by ',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 13,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            books[index]
+                                                                .bAuthor,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 13,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ],
                                                   ),

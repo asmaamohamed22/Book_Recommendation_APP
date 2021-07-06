@@ -1,4 +1,6 @@
-import 'package:book_recommend/models/bookmodel.dart';
+import 'package:book_recommend/adminPages/models/intersetBook.dart';
+import 'package:book_recommend/interests/userinterest.dart';
+import 'package:book_recommend/models/apibookmodel.dart';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
@@ -13,7 +15,7 @@ import 'package:book_recommend/adminPages/services/apiStore.dart';
 
 class RecommendationDetails extends StatefulWidget {
   static String id = 'ApiDetail';
-  final Book book;
+  final Apibook book;
   RecommendationDetails(this.book);
   @override
   _RecommendationDetailsState createState() => _RecommendationDetailsState();
@@ -24,6 +26,7 @@ class _RecommendationDetailsState extends State<RecommendationDetails> {
     super.initState();
     getAllFave();
     getAllSave();
+    getAllInterest();
   }
 
   List<Map<String, dynamic>> allBooksToFav = [];
@@ -55,7 +58,24 @@ class _RecommendationDetailsState extends State<RecommendationDetails> {
     });
   }
 
-  final _store = Store();
+  List<Map<String, dynamic>> allBooksToInterest = [];
+
+  void getAllInterest() async {
+    QuerySnapshot snapShot = await _userInterest.getAllInterests();
+
+    List<QueryDocumentSnapshot> allBooksInInterest = snapShot.docs;
+
+    allBooksInInterest.forEach((element) {
+      print("=-=-=-=-=> ${element.data().toString()}");
+      setState(() {
+        allBooksToInterest.add(element.data());
+      });
+    });
+  }
+
+  final _userInterest = UserInterest();
+  Interest interest;
+  final _store = ApiStore();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -119,8 +139,8 @@ class _RecommendationDetailsState extends State<RecommendationDetails> {
                                 onPressed: () {
                                   int bookIndex = allBooksToSave.indexWhere(
                                       (element) =>
-                                          element["bookIsbn"] ==
-                                          widget.book.isbn);
+                                          element["bookTitle"] ==
+                                          widget.book.bookTitle);
                                   if (bookIndex != -1) {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
@@ -174,7 +194,7 @@ class _RecommendationDetailsState extends State<RecommendationDetails> {
                                     _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                            "Book already exist in favorite list"),
+                                            "Book already in favorite list"),
                                       ),
                                     );
                                   } else {
@@ -372,8 +392,31 @@ class _RecommendationDetailsState extends State<RecommendationDetails> {
                       ),
                       MyButton(
                         name: 'Add to Interest',
-                        onPressed: () {},
-                      ),
+                        onPressed: () {
+                          int bookIndex = allBooksToInterest.indexWhere(
+                              (element) =>
+                                  element["bookName"] == widget.book.bookTitle);
+                          if (bookIndex != -1) {
+                            _scaffoldKey.currentState.showSnackBar(
+                              SnackBar(
+                                content: Text("This Book already added"),
+                              ),
+                            );
+                          } else {
+                            _userInterest
+                                .addUserInterests(
+                              bookName: widget.book.bookTitle,
+                            )
+                                .then((value) {
+                              _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  content: Text("Book added Successfully"),
+                                ),
+                              );
+                            });
+                          }
+                        },
+                      )
                     ],
                   ),
                 ),

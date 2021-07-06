@@ -52,8 +52,8 @@ class MessageBubble extends StatelessWidget {
                             color: !isMe ? Colors.white : Colors.white,
                             fontSize: 14),
                       ),
-                      SizedBox(
-                        height: 5,
+                      Divider(
+                        color: Colors.black,
                       ),
                       Text(
                         mesage,

@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AboutScreen extends StatefulWidget {
   static String id = 'AboutScreen';
@@ -14,9 +16,12 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     //Size size = MediaQuery.of(context).size;
+    final themeProvider = Provider.of<ThemeProvider>(context);
     SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:
+            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         leading: IconButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, HomeScreen.id);

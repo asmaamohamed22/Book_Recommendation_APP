@@ -90,7 +90,7 @@ class _FavoriteState extends State<Favorite> {
                     vertical: SizeConfig.defaultSize * 0.6),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, Details.id,
+                    Navigator.pushNamed(context, Details.id,
                         arguments: books[index]);
                   },
                   child: Container(
@@ -150,11 +150,23 @@ class _FavoriteState extends State<Favorite> {
                                   SizedBox(
                                     height: SizeConfig.defaultSize * 0.7,
                                   ),
-                                  Text(
-                                    books[index].bAuthor,
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.defaultSize * 1.2,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'by ',
+                                        style: TextStyle(
+                                          fontSize:
+                                              SizeConfig.defaultSize * 1.2,
+                                        ),
+                                      ),
+                                      Text(
+                                        books[index].bAuthor,
+                                        style: TextStyle(
+                                          fontSize:
+                                              SizeConfig.defaultSize * 1.2,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

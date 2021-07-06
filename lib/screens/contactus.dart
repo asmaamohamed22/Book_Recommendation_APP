@@ -4,6 +4,7 @@ import 'package:book_recommend/feedback/contact.dart';
 import 'package:book_recommend/onBoarding/config/size_config.dart';
 import 'package:book_recommend/providers/notification_provider.dart';
 import 'package:book_recommend/screens/home.dart';
+import 'package:book_recommend/setting/Style/models_providers/theme_provider.dart';
 import 'package:book_recommend/widgets/mybutton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,10 +29,13 @@ class _ContactUsState extends State<ContactUs> {
     Size size = MediaQuery.of(context).size;
     SizeConfig().init(context);
     feedbackProvider = Provider.of<FeedbackProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     print(name);
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor:
+            themeProvider.isLightTheme ? Colors.white : Color(0xFF26242e),
         leading: IconButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, HomeScreen.id);
@@ -154,13 +158,11 @@ class _ContactUsState extends State<ContactUs> {
                                   .then((value) {
                                 _scaffoldKey.currentState.showSnackBar(
                                   SnackBar(
-                                    content:
-                                        Text("Message Send successfully"),
+                                    content: Text("Message Send successfully"),
                                   ),
                                 );
                               });
-                              feedbackProvider
-                                  .addNotification("Notification");
+                              feedbackProvider.addNotification("Notification");
                               feedbackProvider.addCount();
                             }
                           },

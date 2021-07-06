@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:book_recommend/constant.dart';
 import 'package:book_recommend/screens/home.dart';
 import 'package:provider/provider.dart';
-import 'package:book_recommend/models/bookmodel.dart';
+import 'package:book_recommend/models/apibookmodel.dart';
 import 'package:book_recommend/screens/recommendationDetails.dart';
 
 class Recommendation extends StatefulWidget {
@@ -23,9 +23,9 @@ class _RecommendationState extends State<Recommendation> {
   String bookname;
   String queryDec;
   int count = 0;
-  List<Book> booklist = new List();
+  List<Apibook> booklist = new List();
   Future<void> callUri(decString) async {
-    List<Book> books = [];
+    List<Apibook> books = [];
     print("hello fro calURI");
     print(decString);
     http.Response response = await http.get(
@@ -40,7 +40,7 @@ class _RecommendationState extends State<Recommendation> {
         jsonresponse = jsonDecode(response.body);
         bookcount = jsonresponse.length;
       });
-      final books = bookFromJson(response.body);
+      final books = apibookFromJson(response.body);
       setState(() {
         booklist = books;
       });
