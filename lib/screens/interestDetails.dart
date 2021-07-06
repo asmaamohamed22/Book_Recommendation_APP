@@ -388,7 +388,7 @@ class _InterestDetailsState extends State<InterestDetails> {
                         height: SizeConfig.defaultSize * 2,
                       ),
                       MyButton(
-                        name: 'Add to Interest',
+                        name: 'Interest',
                         onPressed: () {
                           int bookIndex = allBooksToInterest.indexWhere(
                               (element) =>
